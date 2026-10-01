@@ -18,14 +18,19 @@ include_directories(
 file(GLOB_RECURSE CORE_SOURCES src/core/*.cpp)
 add_library(core STATIC ${CORE_SOURCES})
 
+# Thu vien sinh du lieu (nam trong test/)
+add_library(datagen STATIC test/DataGenerator.cpp)
+target_include_directories(datagen PUBLIC test)
+target_link_libraries(datagen PUBLIC core)
+
 # Chuong trinh demo MC1
 add_executable(demo_mc1 src/presentation/demo_mc1.cpp)
-target_link_libraries(demo_mc1 core)
+target_link_libraries(demo_mc1 datagen)
 
 # Chuong trinh test cua Thanh vien 1
 add_executable(test_mc1 test/test_thanhvien1.cpp)
-target_link_libraries(test_mc1 core)
+target_link_libraries(test_mc1 datagen)
 
 # Chuong trinh benchmark MC1
 add_executable(benchmark_mc1 benchmark/benchmark_mc1.cpp)
-target_link_libraries(benchmark_mc1 core)
+target_link_libraries(benchmark_mc1 datagen)

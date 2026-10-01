@@ -20,7 +20,7 @@
 #include "Booking.h"
 #include "MyHashTable.h"
 #include "Persistence.h"
-#include "GenerateData.h"
+#include "DataGenerator.h"
 
 namespace {
 
