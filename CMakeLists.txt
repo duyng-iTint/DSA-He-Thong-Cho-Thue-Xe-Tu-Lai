@@ -34,3 +34,10 @@ target_link_libraries(test_mc1 datagen)
 # Chuong trinh benchmark MC1
 add_executable(benchmark_mc1 benchmark/benchmark_mc1.cpp)
 target_link_libraries(benchmark_mc1 datagen)
+
+
+# Ứng dụng Console chính
+add_executable(CarRentalApp
+    src/presentation/main.cpp
+)
+target_link_libraries(CarRentalApp PRIVATE CarRentalCore)
