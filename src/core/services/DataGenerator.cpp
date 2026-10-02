@@ -1,6 +1,6 @@
 // project/tools/DataGenerator.cpp
 #include "DataGenerator.h"
-#include "Booking.h"
+#include "../model/Booking.h"
 
 #include <fstream>
 #include <random>
