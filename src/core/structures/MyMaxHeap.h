@@ -22,12 +22,14 @@ private:
     unordered_map<string, int> indexMap;
 
     bool HigherPriority(const RentalRequest& a, const RentalRequest& b) {
-        if (a.membershipTier != b.membershipTier) {
-            return a.membershipTier > b.membershipTier;
-        }
-
+    if (a.membershipTier != b.membershipTier) {
+        return a.membershipTier > b.membershipTier;
+    }
+    if (a.bookingTimestamp != b.bookingTimestamp) {
         return a.bookingTimestamp < b.bookingTimestamp;
     }
+    return a.bookingId < b.bookingId;
+}
 
     void SwapAndSync(int i, int j) {
         RentalRequest temp = heap[i];
@@ -97,7 +99,7 @@ private:
 public:
     void InsertRequest(const RentalRequest& req) {
         heap.push_back(req);
-
+        
         int newIndex = static_cast<int>(heap.size()) - 1;
         indexMap[req.bookingId] = newIndex;
 
