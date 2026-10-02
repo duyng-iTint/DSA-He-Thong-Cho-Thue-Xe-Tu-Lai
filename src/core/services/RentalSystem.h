@@ -1,12 +1,12 @@
 #ifndef RENTALSYSTEM_H
 #define RENTALSYSTEM_H
 
-#include "UndoStack.h"
+#include "../structures/UndoStack.h"
 #include <vector>
 
 class renTalSystem {
 private:
-    vector<renTal> rentals;
+    std::vector<renTal> rentals;
     UnoManager undoManager;
 
 public:
