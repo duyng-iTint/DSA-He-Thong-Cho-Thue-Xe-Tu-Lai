@@ -1,7 +1,7 @@
 #ifndef TESTS_H
 #define TESTS_H
 
-#include "RentalSystem.h"
+#include "../src/core/services/RentalSystem.h"
 
 bool testStackLIFO();
 bool testPopEmptyStack();

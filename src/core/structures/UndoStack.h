@@ -1,7 +1,7 @@
 #ifndef UNDOSTACK_H
 #define UNDOSTACK_H
 
-#include "Rental.h"
+#include "../model/Rental.h"
 
 enum class ActionType {
     ADD,

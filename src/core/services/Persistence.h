@@ -22,8 +22,8 @@
 #include <vector>
 #include <memory>
 
-#include "Booking.h"
-#include "MyHashTable.h"
+#include "../model/Booking.h"
+#include "../structures/MyHashTable.h"
 
 // Noi so huu that su cac Booking (tranh memory leak / dangling pointer).
 // Hai bang bam (theo booking_id va theo bien_so) chi giu Booking* tro

@@ -1,7 +1,7 @@
 #ifndef BENCHMARK_H
 #define BENCHMARK_H
 
-#include "RentalSystem.h"
+#include "../src/core/services/RentalSystem.h"
 
 class MyHashTable {
 private:

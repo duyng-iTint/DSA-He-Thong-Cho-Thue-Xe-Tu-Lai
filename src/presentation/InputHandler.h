@@ -1,7 +1,7 @@
 #ifndef INPUTHANDLER_H
 #define INPUTHANDLER_H
 
-#include "RentalSystem.h"
+#include "../core/services/RentalSystem.h"
 
 renTal inputRental();
 renTal inputUpdatedRental(const string& bookingID);

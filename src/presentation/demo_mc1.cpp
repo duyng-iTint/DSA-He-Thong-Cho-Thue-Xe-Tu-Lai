@@ -17,10 +17,10 @@
 #include <fstream>
 #include <string>
 
-#include "Booking.h"
-#include "MyHashTable.h"
-#include "Persistence.h"
-#include "DataGenerator.h"
+#include "../core/model/Booking.h"
+#include "../core/structures/MyHashTable.h"
+#include "../core/services/Persistence.h"
+#include "../core/services/DataGenerator.h"
 
 namespace {
 const std::string CSV_PATH = "donthue_xe.csv";
