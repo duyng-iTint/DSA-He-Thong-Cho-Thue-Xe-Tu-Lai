@@ -18,10 +18,9 @@ include_directories(
 file(GLOB_RECURSE CORE_SOURCES src/core/*.cpp)
 add_library(core STATIC ${CORE_SOURCES})
 
-# Thu vien sinh du lieu (nam trong test/)
-add_library(datagen STATIC test/DataGenerator.cpp)
-target_include_directories(datagen PUBLIC test)
-target_link_libraries(datagen PUBLIC core)
+# DataGenerator nam trong src/core/services nen da co san trong core
+add_library(datagen INTERFACE)
+target_link_libraries(datagen INTERFACE core)
 
 # Chuong trinh demo MC1
 add_executable(demo_mc1 src/presentation/demo_mc1.cpp)
@@ -40,4 +39,4 @@ target_link_libraries(benchmark_mc1 datagen)
 add_executable(CarRentalApp
     src/presentation/main.cpp
 )
-target_link_libraries(CarRentalApp PRIVATE CarRentalCore)
+target_link_libraries(CarRentalApp PRIVATE core)
