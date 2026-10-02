@@ -18,6 +18,8 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#undef max
+#undef min
 #endif
 
 namespace {
