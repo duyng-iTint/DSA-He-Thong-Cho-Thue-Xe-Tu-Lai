@@ -1,6 +1,7 @@
 // project/tools/DataGenerator.cpp
 #include "DataGenerator.h"
 #include "../model/Booking.h"
+#include "CsvCodec.h"
 
 #include <fstream>
 #include <random>
@@ -42,6 +43,7 @@ void generateCsv(const std::string& csvPath, int nRecords, unsigned int seed) {
     std::uniform_int_distribution<int> distThang(1, 12);
     std::uniform_int_distribution<int> distNgay(1, 28);
     std::uniform_int_distribution<int> distSoNgayThue(1, 10);
+    std::uniform_int_distribution<int> distHangThanhVien(0, 3);
     std::uniform_int_distribution<std::size_t> distTrangThai(0, TRANG_THAI_CHOICES.size() - 1);
 
     std::ofstream out(csvPath, std::ios::trunc);
@@ -67,10 +69,14 @@ void generateCsv(const std::string& csvPath, int nRecords, unsigned int seed) {
         int soNgayThue = distSoNgayThue(rng);
         int ngayKt = std::min(ngayBd + soNgayThue, 28);
         std::string ngayKetThuc = "2026-" + padLeft(thangBd, 2) + "-" + padLeft(ngayKt, 2);
-        std::string trangThai = TRANG_THAI_CHOICES[distTrangThai(rng)];
-
-        out << bookingId << ',' << bienSo << ',' << tenKhach << ','
-            << xe.first << ',' << xe.second << ','
-            << ngayBatDau << ',' << ngayKetThuc << ',' << trangThai << "\n";
+        Booking booking;
+        booking.booking_id = bookingId; booking.bien_so = bienSo; booking.ten_khach = tenKhach;
+        booking.hang_xe = xe.first; booking.dong_xe = xe.second;
+        booking.ngay_bat_dau = ngayBatDau; booking.ngay_ket_thuc = ngayKetThuc;
+        booking.trang_thai = TRANG_THAI_CHOICES[distTrangThai(rng)];
+        booking.gia_tien = static_cast<double>(soNgayThue) * 350000.0;
+        booking.hang_thanh_vien = distHangThanhVien(rng);
+        booking.thoi_diem_dat = 1760000000000LL + static_cast<long long>(i) * 60000LL;
+        out << CsvCodec::encodeRow(booking.toRow()) << "\n";
     }
 }

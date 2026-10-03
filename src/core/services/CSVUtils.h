@@ -1,10 +1,7 @@
 // CSVUtils.h
-// Doc file donthue_xe.csv thanh vector<RentalRecord>.
-// LUU Y: Day la ban doc du lieu RIENG cua module MC2 de co the chay doc lap/demo/test.
-// Trong he thong hoan chinh, tang Persistence (Thanh vien 1) se chiu trach nhiem
-// nap/ghi file chinh thuc; MC2 chi nhan lai vector<RentalRecord> tu tang do.
-// Dinh dang moi dong CSV (khong co dong tieu de bi tinh vao du lieu):
-// BookingID,CarPlate,CarBrand,CarModel,RentDate,ReturnDate,Price,CustomerName,MemberRank
+// Doc unified booking CSV thanh RentalRecord; van doc duoc schema MC2 cu.
+// Adapter giu cho demo/test MC2 doc lap; he thong dung Persistence lam nguon chinh.
+// Unified schema va hai ten cot MC2 cu deu duoc nhan dang theo header.
 #pragma once
 #include <vector>
 #include <string>

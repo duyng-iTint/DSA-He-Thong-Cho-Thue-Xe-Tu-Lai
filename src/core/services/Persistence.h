@@ -48,7 +48,7 @@ int loadIntoHashTable(const std::string& csvPath,
                        MyHashTable<Booking*>& tableById,
                        MyHashTable<Booking*>& tableByPlate);
 
-// Ghi toan bo ban ghi hien co trong tableById ra file CSV.
+// Ghi toan bo ban ghi hien co trong tableById theo unified Booking/RentalRecord CSV schema.
 // Chi can duyet 1 trong 2 bang (tableById) vi ca 2 bang cung tro toi
 // cung cac Booking - khong bi trung lap du lieu.
 // Tra ve so dong da ghi.

@@ -1,6 +1,6 @@
 #include "presentation/InputHandler.h"
-#include "../test/Tests.h"
-#include "../benchmark/Benchmark.h"
+#include "../../test/Tests.h"
+#include "../../benchmark/Benchmark.h"
 
 void runProgram() {
     renTalSystem system;
