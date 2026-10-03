@@ -144,10 +144,10 @@ int main(int argc, char** argv) {
     });
     std::unordered_map<std::string, Booking*> byBookingId;
     std::vector<RentalRecord> records;
-    Trie suggestions;
+    CarTrie suggestions;
     for (Booking* b : bookings) {
         byBookingId[b->booking_id] = b;
-        suggestions.insert(b->hang_xe + " " + b->dong_xe);
+        suggestions.insertCar(b->hang_xe, b->dong_xe);
         records.push_back(RentalRecord::fromBooking(*b));
     }
 
@@ -176,7 +176,9 @@ int main(int argc, char** argv) {
         std::cout << ']'; return 0;
     }
     if (command == "suggest" && argc >= 4) {
-        auto result = suggestions.autocomplete(argv[3], 8);
+        auto result = suggestions.getAllSuggestions(argv[3]);
+        std::sort(result.begin(), result.end());
+        if (result.size() > 8) result.resize(8);
         std::cout << '[';
         for (std::size_t i = 0; i < result.size(); ++i) { if (i) std::cout << ','; std::cout << json(result[i]); }
         std::cout << ']'; return 0;

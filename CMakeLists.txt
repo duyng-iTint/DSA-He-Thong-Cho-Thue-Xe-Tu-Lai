@@ -29,3 +29,13 @@ target_link_libraries(RentalMC1Demo PRIVATE core)
 add_executable(BenchmarkMC1 benchmark/benchmark_mc1.cpp)
 target_include_directories(BenchmarkMC1 PRIVATE src/core/model src/core/structures src/core/services)
 target_link_libraries(BenchmarkMC1 PRIVATE core)
+
+enable_testing()
+add_executable(TestMC2Correctness test/test_correctness.cpp)
+target_link_libraries(TestMC2Correctness PRIVATE core)
+add_test(NAME TestMC2Correctness COMMAND TestMC2Correctness)
+
+add_executable(TestMC1Persistence test/test_thanhvien1.cpp)
+target_include_directories(TestMC1Persistence PRIVATE src/core/model src/core/structures src/core/services)
+target_link_libraries(TestMC1Persistence PRIVATE core)
+add_test(NAME TestMC1Persistence COMMAND TestMC1Persistence)

@@ -17,6 +17,10 @@ cmake -S . -B build/web-integration
 cmake --build build/web-integration --config Release
 node web/server.js
 ```
+Dừng web:
+```
+Stop-Process -Id (Get-NetTCPConnection -LocalPort 127.0.0.1:3000).OwningProcess -Force        
+```
 
 ## Chức năng và module được gọi
 

@@ -49,7 +49,7 @@ Hệ thống được tổ chức thành 3 tầng:
 │               PERSISTENCE                 │
 │                                           │
 │ CSV Load / Save                           │
-│ donthue_xe.csv                            │
+│ data/donthue_xe.csv                       │
 └───────────────────────────────────────────┘
 ```
 

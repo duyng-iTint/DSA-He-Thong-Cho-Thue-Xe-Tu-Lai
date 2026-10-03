@@ -9,7 +9,7 @@
 //     ./demo_mc1
 //
 // Chuc nang demo:
-// 1. Nap du lieu tu donthue_xe.csv (neu chua co thi tu sinh 1.000 dong).
+// 1. Nap du lieu tu data/donthue_xe.csv (neu chua co thi tu sinh 1.000 dong).
 // 2. Cho nguoi dung tra cuu theo Booking_ID hoac bien so.
 // 3. Cho phep them 1 don thue moi roi luu lai ra CSV.
 
@@ -23,7 +23,7 @@
 #include "../core/services/DataGenerator.h"
 
 namespace {
-const std::string CSV_PATH = "donthue_xe.csv";
+const std::string CSV_PATH = "data/donthue_xe.csv";
 
 bool fileExists(const std::string& path) {
     std::ifstream f(path);
