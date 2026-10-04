@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include "MyHashTable.h"
 #include <stdexcept>
 
 using namespace std;
@@ -19,7 +19,7 @@ struct RentalRequest {
 class MyMaxHeap {
 private:
     vector<RentalRequest> heap;
-    unordered_map<string, int> indexMap;
+    MyHashTable<int> indexMap;
 
     bool HigherPriority(const RentalRequest& a, const RentalRequest& b) {
     if (a.membershipTier != b.membershipTier) {
@@ -36,8 +36,8 @@ private:
         heap[i] = heap[j];
         heap[j] = temp;
 
-        indexMap[heap[i].bookingId] = i;
-        indexMap[heap[j].bookingId] = j;
+        indexMap.insert(heap[i].bookingId, i);
+        indexMap.insert(heap[j].bookingId, j);
     }
 
     void SiftUp(int i) {
@@ -81,11 +81,11 @@ private:
     void RemoveAtIndex(int idx) {
         int lastIdx = static_cast<int>(heap.size()) - 1;
 
-        indexMap.erase(heap[idx].bookingId);
+        indexMap.remove(heap[idx].bookingId);
 
         if (idx != lastIdx) {
             heap[idx] = heap.back();
-            indexMap[heap[idx].bookingId] = idx;
+            indexMap.insert(heap[idx].bookingId, idx);
         }
 
         heap.pop_back();
@@ -97,13 +97,20 @@ private:
     }
 
 public:
-    void InsertRequest(const RentalRequest& req) {
+    bool InsertRequest(const RentalRequest& req) {
+        // Khong cho phep trung BookingID
+        if (indexMap.contains(req.bookingId)) {
+            return false;
+        }
+
         heap.push_back(req);
-        
+
         int newIndex = static_cast<int>(heap.size()) - 1;
-        indexMap[req.bookingId] = newIndex;
+        indexMap.insert(req.bookingId, newIndex);
 
         SiftUp(newIndex);
+
+        return true;
     }
 
     RentalRequest ExtractMax() {
@@ -116,29 +123,38 @@ public:
 
         return top;
     }
-
     bool RemoveById(const string& bookingId) {
-        auto it = indexMap.find(bookingId);
+    int index;
 
-        if (it == indexMap.end()) {
-            return false;
-        }
-
-        RemoveAtIndex(it->second);
-        return true;
+    if (!indexMap.search(bookingId, index)) {
+        return false;
     }
 
-    void BuildHeap(const vector<RentalRequest>& initial) {
-        heap = initial;
+    RemoveAtIndex(index);
+    return true;
+    }
+
+    bool BuildHeap(const vector<RentalRequest>& initial) {
+        heap.clear();
         indexMap.clear();
 
-        for (int i = 0; i < static_cast<int>(heap.size()); i++) {
-            indexMap[heap[i].bookingId] = i;
+        for (const RentalRequest& req : initial) {
+            // Khong cho phep trung BookingID
+            if (indexMap.contains(req.bookingId)) {
+                return false;
+            }
+
+            heap.push_back(req);
+
+            int index = static_cast<int>(heap.size()) - 1;
+            indexMap.insert(req.bookingId, index);
         }
 
         for (int i = static_cast<int>(heap.size()) / 2 - 1; i >= 0; i--) {
             SiftDown(i);
         }
+
+        return true;
     }
 
     bool Empty() const {
