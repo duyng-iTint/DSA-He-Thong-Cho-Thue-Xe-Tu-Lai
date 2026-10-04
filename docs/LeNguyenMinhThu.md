@@ -60,11 +60,11 @@ Hệ thống quản lý cho thuê xe cần lưu các đơn thuê xe và cho phé
 # 2. Phân tích các yêu cầu
 
 | Requirement | Nội dung | Access pattern chính |
-| ---------- - | ---------------------------------- | -------------------- |
-| MC1 | Lấy một bản ghi từ mã | Tra cứu theo ID      |
-| MC2 | Truy vấn theo thời gian / thống kê | Range / Statistics   |
-| RF1 | Gợi ý hãng xe theo prefix | Prefix search        |
-| RF2 | Xử lý tranh chấp đặt xe | Priority             |
+| --- | --- | --- |
+| MC1 | Lấy một bản ghi từ mã | Tra cứu theo ID |
+| MC2 | Truy vấn theo thời gian / thống kê | Range / Statistics |
+| RF1 | Gợi ý hãng xe theo prefix | Prefix search |
+| RF2 | Xử lý tranh chấp đặt xe | Priority |
 | RF3 | Hoàn tác thao tác gần nhất | LIFO |
 
 -- -
