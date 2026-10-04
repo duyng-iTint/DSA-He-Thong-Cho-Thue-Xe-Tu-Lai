@@ -602,13 +602,17 @@ Bucket
 ```
 ### 3.3. Các thao tác chính
 insert(): thêm dữ liệu hoặc cập nhật nếu key đã tồn tại.
+
 search(): tìm kiếm theo key.
+
 remove(): xóa node khỏi bucket.
+
 resize(): mở rộng bảng khi load factor > 0.75 và thực hiện rehash.
 
 Độ phức tạp:
 
 insert/search/remove: O(1) trung bình.
+
 Trường hợp xấu nhất: O(N).
 ## 4. Đánh giá phần kiểm thử
 
