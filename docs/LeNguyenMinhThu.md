@@ -411,12 +411,12 @@ Do đó Stack phù hợp với workload của RF3.
 Complexity:
 
 | Operation | Complexity |
-| ---------- - | ---------- |
-| `push()` | O(1)       |
-| `pop()` | O(1)       |
-| `top()` | O(1)       |
-| `empty()` | O(1)       |
-| `getSize()` | O(1)       |
+| --- | --- |
+| `push()` | O(1) |
+| `pop()` | O(1) |
+| `top()` | O(1) |
+| `empty()` | O(1) |
+| `getSize()` | O(1) |
 | `clear()` | O(n) |
 
 Tuy nhiên, cần phân biệt complexity của Stack với complexity của toàn bộ `undoRental()`.
@@ -616,7 +616,7 @@ Công việc bổ sung: Automated Test + Benchmark.
 Branch: feature/m5-rf3.
 # 2. Nội dung Demo
 Luồng Demo chính
-
+```text
 ADD
 ↓
 UPDATE
@@ -625,6 +625,7 @@ DELETE
 ↓
 UNDO
 ↓
+```
 Khôi phục trạng thái dữ liệu
 
 Các trường hợp cần minh họa
@@ -642,6 +643,7 @@ Undo nhiều bước:
 ## 3.1. Giải thích và Trace Code
 Luồng xử lý
 Người dùng ADD / UPDATE / DELETE
+```text
               |
               v
           Tạo Action
@@ -657,6 +659,7 @@ Người dùng ADD / UPDATE / DELETE
               |
               v
       Khôi phục dữ liệu từ Action
+```
 Các thành phần chính
 - Action: Lưu thông tin của một thao tác có thể Undo.
 - StackNode: Node dùng để xây dựng Stack bằng danh sách liên kết.
