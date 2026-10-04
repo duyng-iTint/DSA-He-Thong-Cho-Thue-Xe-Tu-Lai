@@ -33,8 +33,8 @@ bool fileExists(const std::string& path) {
 
 int main() {
     if (!fileExists(CSV_PATH)) {
-        std::cout << "Chua co " << CSV_PATH << ", tu sinh 1.000 ban ghi gia lap...\n";
-        generateCsv(CSV_PATH, 1000);
+        std::cout << "Chua co " << CSV_PATH << ", tu sinh 10.000 ban ghi gia lap...\n";
+        generateCsv(CSV_PATH, 10000);
     }
 
     PersistenceContext ctx;
