@@ -551,20 +551,99 @@ UPDATE B001
 Do đó, lựa chọn `MyStack` xuất phát trực tiếp từ** access pattern của RF3**, thay vì chọn cấu trúc dữ liệu chỉ dựa trên thói quen hoặc tính phổ biến.
 
 Phần Automated Test và Benchmark được thực hiện để kiểm chứng tính đúng đắn và hiệu năng của component, nhưng được trình bày riêng trong phần công việc kiểm thử và đánh giá hiệu năng.
-# D6 - Peer technical review
-# Peer Technical Review — Thành viên 1
+# D6 — ĐÁNH GIÁ KỸ THUẬT THÀNH VIÊN TRONG NHÓM
 
-## Component được review : MyHashTable
+## 1. Thành phần được đánh giá
 
-`MyHashTable` của thành viên 1 được sử dụng để giải quyết MC1, trong đó hệ thống cần tra cứu đơn thuê hoặc xe theo mã định danh.Thiết kế sử dụng** Separate Chaining**, mỗi bucket chứa một danh sách liên kết các node `(key, value)`, nên phù hợp để xử lý trường hợp nhiều key bị hash vào cùng một vị trí.
+- **Cấu trúc dữ liệu:** Hash Table
+- **Thành phần:** `MyHashTable`
+- **File cài đặt:** `MyHashTable.h`
+- **Mục đích:** Tra cứu đơn thuê/xe theo mã định danh cho yêu cầu MC1.
 
-Điểm đáng chú ý là hàm `hashKey()` được tự cài đặt theo dạng polynomial rolling hash và component không sử dụng `std::unordered_map` cho chức năng tra cứu chính.Ngoài ra, cơ chế tự động `resize()` khi load factor lớn hơn `0.75` giúp duy trì hiệu năng trung bình O(1) khi dữ liệu tăng.
+---
 
-Về độ phức tạp, `insert()`, `search()` và `remove()` có O(1) trung bình và O(N) worst - case khi xảy ra nhiều collision.Đây là phân tích phù hợp với cách tổ chức Separate Chaining.
+## 2. Nội dung đánh giá
 
-Một số điểm có thể cải thiện là bổ sung test cho collision và dữ liệu lớn, xử lý rõ trường hợp `initialCapacity = 0`, đồng thời xem xét `contains()` vì việc tạo `V dummy` yêu cầu kiểu `V` phải có constructor mặc định.
+Tiến hành xem xét phần cài đặt `MyHashTable` của thành viên 1, tập trung vào:
 
-Nhìn chung, component có thiết kế phù hợp với workload của MC1 và thể hiện rõ việc tự cài đặt cấu trúc dữ liệu.
+- Cách xây dựng Hash Table.
+- Hàm băm và xử lý xung đột.
+- Các thao tác `insert()`, `search()`, `remove()`.
+- Cơ chế `resize()`.
+- Kiểm thử và benchmark hiệu năng.
+
+---
+
+## 3. Đánh giá phần cài đặt
+
+### 3.1. Cấu trúc dữ liệu
+
+`MyHashTable` sử dụng **Separate Chaining**, mỗi bucket chứa một danh sách liên kết các `Node`.
+
+| Thành phần | Vai trò |
+|---|---|
+| `key` | Khóa dùng để tra cứu |
+| `value` | Dữ liệu tương ứng |
+| `next` | Liên kết node tiếp theo |
+| `buckets_` | Danh sách các bucket |
+
+Thiết kế này phù hợp với MC1 vì yêu cầu tra cứu chính xác theo mã định danh.
+
+### 3.2. Hàm băm và xử lý xung đột
+
+Hàm `hashKey()` được tự cài đặt bằng **polynomial rolling hash**, không sử dụng `std::hash`.
+
+Khi nhiều khóa có cùng vị trí, chương trình sử dụng Separate Chaining:
+
+```text
+Bucket
+  ↓
+[Node] → [Node] → [Node]
+```
+### 3.3. Các thao tác chính
+insert(): thêm dữ liệu hoặc cập nhật nếu key đã tồn tại.
+search(): tìm kiếm theo key.
+remove(): xóa node khỏi bucket.
+resize(): mở rộng bảng khi load factor > 0.75 và thực hiện rehash.
+
+Độ phức tạp:
+
+insert/search/remove: O(1) trung bình.
+Trường hợp xấu nhất: O(N).
+## 4. Đánh giá phần kiểm thử
+
+Các trường hợp chính được kiểm tra:
+
+| Test | Nội dung | Kết quả |
+|---|---|---|
+| Test 1 | Thêm phần tử | PASS |
+| Test 2 | Tìm key tồn tại | PASS |
+| Test 3 | Tìm key không tồn tại | PASS |
+| Test 4 | Cập nhật key | PASS |
+| Test 5 | Xóa phần tử | PASS |
+| Test 6 | Kiểm tra xử lý xung đột và resize | PASS |
+
+Ngoài ra, benchmark được sử dụng để so sánh thời gian tìm kiếm của MyHashTable với tìm kiếm tuyến tính khi số lượng dữ liệu tăng.
+
+## 5. Những điểm làm tốt
+| STT	| Nội dung |	Đánh giá |
+|---|---| --- |
+| 1 |	Tự cài đặt Hash Table |	Đáp ứng yêu cầu cấu trúc dữ liệu
+| 2 |	Separate Chaining |	Có xử lý xung đột
+| 3 |	Tự cài đặt hàm băm |	Không phụ thuộc std::hash
+| 4 |	Có resize()	| Phù hợp khi dữ liệu tăng
+| 5 |	Có kiểm thử và benchmark |	Có cơ sở đánh giá tính đúng đắn và hiệu năng
+## 6. Vấn đề phát hiện được
+
+Qua kiểm tra phần MyHashTable, chưa phát hiện lỗi nghiêm trọng ảnh hưởng đến chức năng chính của MC1.
+
+Thiết kế Separate Chaining phù hợp với việc xử lý xung đột. Các thao tác insert(), search() và remove() đều được cài đặt trực tiếp trên cấu trúc dữ liệu tự xây dựng.
+
+Cơ chế resize() khi load factor vượt quá 0.75 giúp hạn chế việc các phần tử tập trung quá nhiều vào một bucket khi dữ liệu tăng.
+
+Một điểm cần lưu ý là search() có độ phức tạp O(1) trung bình nhưng O(N) trong trường hợp xấu nhất, do vẫn phải duyệt các node trong cùng một chain nếu xảy ra nhiều va chạm.
+
+Nhìn chung, MyHashTable phù hợp với yêu cầu MC1 – tra cứu chính xác theo mã định danh và có cơ sở để đánh giá hiệu năng thông qua benchmark với tìm kiếm tuyến tính.
 # D7 — NHẬT KÝ SỬ DỤNG AI& BÀI PHẢN TƯ CÁ NHÂN
 ## 1. Nhật ký sử dụng AI
 
