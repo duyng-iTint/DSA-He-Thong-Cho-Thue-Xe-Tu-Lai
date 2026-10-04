@@ -10,8 +10,6 @@
 #include <string>
 #include "../model/RentalRecord.h"
 
-// Tra ve chi so DAU TIEN i sao cho arr[i].rentDate >= target
-// (day chinh la "lower_bound" tu cai dat bang tay)
 inline int lowerBoundByDate(const std::vector<RentalRecord>& arr, const std::string& target) {
     int lo = 0;
     int hi = static_cast<int>(arr.size()); // hi == size() nghia la "khong tim thay / vuot qua cuoi"
@@ -27,8 +25,6 @@ inline int lowerBoundByDate(const std::vector<RentalRecord>& arr, const std::str
     return lo;
 }
 
-// Tra ve chi so NGAY SAU phan tu CUOI CUNG co rentDate <= target
-// (tuong duong "upper_bound" tu cai dat bang tay)
 inline int upperBoundByDate(const std::vector<RentalRecord>& arr, const std::string& target) {
     int lo = 0;
     int hi = static_cast<int>(arr.size());
@@ -44,8 +40,6 @@ inline int upperBoundByDate(const std::vector<RentalRecord>& arr, const std::str
     return lo;
 }
 
-// Ham Linear Scan tuong duong, CHI dung de lam Benchmark so sanh voi Binary Search,
-// khong dung trong luong xu ly chinh (de chung minh Binary Search vuot troi khi N lon).
 inline int linearScanFirstDateGE(const std::vector<RentalRecord>& arr, const std::string& target) {
     for (int i = 0; i < static_cast<int>(arr.size()); ++i) {
         if (arr[i].rentDate >= target) return i;

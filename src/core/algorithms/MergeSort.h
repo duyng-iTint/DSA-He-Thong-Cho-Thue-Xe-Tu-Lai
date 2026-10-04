@@ -11,7 +11,6 @@
 #pragma once
 #include <vector>
 
-// Tron 2 doan da sap xep [left..mid] va [mid+1..right] thanh 1 doan sap xep
 template <typename T, typename Compare>
 void mergeInPlace(std::vector<T>& arr, int left, int mid, int right, Compare cmp) {
     std::vector<T> temp;
@@ -21,7 +20,6 @@ void mergeInPlace(std::vector<T>& arr, int left, int mid, int right, Compare cmp
     int j = mid + 1;
 
     while (i <= mid && j <= right) {
-        // cmp(a, b) == true nghia la "a phai dung truoc b"
         if (cmp(arr[i], arr[j])) {
             temp.push_back(arr[i]);
             ++i;
@@ -38,7 +36,6 @@ void mergeInPlace(std::vector<T>& arr, int left, int mid, int right, Compare cmp
     }
 }
 
-// Ham de quy chinh: chia doi mang lien tuc roi tron lai
 template <typename T, typename Compare>
 void mergeSortRange(std::vector<T>& arr, int left, int right, Compare cmp) {
     if (left >= right) return; // 0 hoac 1 phan tu - da sap xep
@@ -49,7 +46,6 @@ void mergeSortRange(std::vector<T>& arr, int left, int right, Compare cmp) {
     mergeInPlace(arr, left, mid, right, cmp);
 }
 
-// Ham tien ich goi tu ben ngoai: mergeSort(vec, comparator)
 template <typename T, typename Compare>
 void mergeSort(std::vector<T>& arr, Compare cmp) {
     if (arr.size() < 2) return;

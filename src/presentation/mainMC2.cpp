@@ -26,7 +26,6 @@ namespace {
 
 void setupConsole() {
 #ifdef _WIN32
-    // Cho phep hien thi tieng Viet co dau dung tren Console Windows
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 #endif

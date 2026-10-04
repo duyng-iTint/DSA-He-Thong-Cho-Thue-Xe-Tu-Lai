@@ -7,8 +7,6 @@
 #include <iomanip>
 
 void RentalService::sortByRentDate(std::vector<RentalRecord>& records) {
-    // Comparator: sap xep theo rentDate tang dan; neu trung ngay thi sap theo bookingId
-    // de ket qua on dinh, de kiem tra lai (deterministic).
     mergeSort(records, [](const RentalRecord& a, const RentalRecord& b) {
         if (a.rentDate != b.rentDate) return a.rentDate < b.rentDate;
         return a.bookingId < b.bookingId;
@@ -34,13 +32,11 @@ std::vector<RentalRecord> RentalService::queryByDateRange(
 }
 
 std::vector<CarStat> RentalService::buildCarStats(const std::vector<RentalRecord>& records) {
-    // Buoc 1: copy va Merge Sort theo carPlate de cac ban ghi cung 1 xe dung ke nhau
     std::vector<RentalRecord> byPlate = records;
     mergeSort(byPlate, [](const RentalRecord& a, const RentalRecord& b) {
         return a.carPlate < b.carPlate;
     });
 
-    // Buoc 2: quet tuyen tinh 1 lan, gom nhom cac ban ghi lien tiep co cung carPlate
     std::vector<CarStat> stats;
     for (size_t i = 0; i < byPlate.size(); ) {
         size_t j = i;
@@ -61,7 +57,6 @@ std::vector<CarStat> RentalService::buildCarStats(const std::vector<RentalRecord
 }
 
 std::vector<CarStat> RentalService::topRentedCars(std::vector<CarStat> stats, int topK) {
-    // Merge Sort giam dan theo rentCount
     mergeSort(stats, [](const CarStat& a, const CarStat& b) {
         return a.rentCount > b.rentCount;
     });
@@ -79,11 +74,8 @@ void RentalService::benchmarkRangeQuery(
 
     using Clock = std::chrono::high_resolution_clock;
 
-    // Mot lan tim don le co the chi mat vai chuc nano-giay (qua nho, khong on dinh
-    // de do dac). De co so lieu dang tin cay, lap lai truy van nhieu lan va lay TONG
-    // thoi gian / trung binh - ky thuat pho bien khi benchmark cac thao tac O(log N).
     const int REPEAT = 20000;
-    volatile long long sinkBinary = 0; // 'volatile' de trinh bien dich toi uu loai bo vong lap
+    volatile long long sinkBinary = 0; 
     volatile long long sinkLinear = 0;
 
     // --- Binary Search ---
