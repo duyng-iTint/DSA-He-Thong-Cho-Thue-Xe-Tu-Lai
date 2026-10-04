@@ -680,8 +680,8 @@ kết quả và trường hợp không tìm thấy đều được kiểm thử 
 
 Phần kiểm tra tốc độ cũng được thực hiện với nhiều kích thước dữ liệu
 để đánh giá khả năng hoạt động khi số lượng xe tăng.
-# D7 — ĐÁNH GIÁ HIỆU NĂNG và NHẬT KÍ SỬ DỤNG AI
-# Đánh giá hiệu năng
+# D7 — BÀI PHẢN TƯ CÁ NHÂN và NHẬT KÍ SỬ DỤNG AI
+# Bài phản tư cá nhân
 ### 1. Những gì em đã học được
 
 Qua quá trình thực hiện RF2 — Xử lý xung đột đặt xe, em hiểu rõ hơn cách
