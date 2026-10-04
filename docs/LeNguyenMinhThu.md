@@ -2,14 +2,14 @@
 
 ## Thông tin thành viên
 
-| Thông tin | Nội dung                                                      |
-| -------------------- - | ------------------------------------------------------------ - |
-| Họ tên | Lê Nguyễn Minh Thư                                            |
-| MSSV | 25110356                                                      |
+| Thông tin | Nội dung |
+|---|---|
+| Họ tên | Lê Nguyễn Minh Thư |
+| MSSV | 25110356 |
 | Lĩnh vực | Hệ thống quản lý cho thuê xe tự lái & xử lý tranh chấp đặt xe |
-| Requirement phụ trách | RF3                                                           |
-| Component | MyStack + UndoManager                                         |
-| Công việc bổ sung | Automated Test + Benchmark                                    |
+| Requirement phụ trách | RF3 |
+| Component | MyStack + UndoManager |
+| Công việc bổ sung | Automated Test + Benchmark  |
 | Branch | `feature/rf3 - undo - stack` |
 
 -- -
