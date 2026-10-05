@@ -126,6 +126,21 @@ int linearRangeQuery(
     return count;
 }
 
+template <typename Query>
+double measureNanosecondsPerQuery(Query query) {
+    volatile int checksum = 0;
+    size_t queryCount = 0;
+    const auto start = steady_clock::now();
+    do {
+        checksum += query();
+        ++queryCount;
+    } while (steady_clock::now() - start < milliseconds(100));
+
+    const double elapsedNs = duration<double, nano>(steady_clock::now() - start).count();
+    (void)checksum;
+    return elapsedNs / queryCount;
+}
+
 //benchmark
 
 void benchmark(int n) {
@@ -136,64 +151,25 @@ void benchmark(int n) {
     int startDate = 20240101 + n / 3;
     int endDate = startDate + 100;
 
-    const int N_QUERIES = 1000;
-
-    volatile int checksum = 0;
-
-
-    // test binary search
-
-    auto startBinary = high_resolution_clock::now();
-
-    for (int i = 0; i < N_QUERIES; i++) {
-
-        checksum += binaryRangeQuery(
-            data,
-            startDate,
-            endDate
-        );
+    const int binaryResult = binaryRangeQuery(data, startDate, endDate);
+    const int linearResult = linearRangeQuery(data, startDate, endDate);
+    if (binaryResult != linearResult) {
+        cerr << "Loi: Binary Search va Linear Scan tra ket qua khac nhau.\n";
+        return;
     }
 
-    auto endBinary = high_resolution_clock::now();
-
-
-    long long timeBinary =
-        duration_cast<nanoseconds>(
-            endBinary - startBinary
-        ).count();
-
-    //test linear scan
-
-    auto startLinear = high_resolution_clock::now();
-
-    for (int i = 0; i < N_QUERIES; i++) {
-
-        checksum += linearRangeQuery(
-            data,
-            startDate,
-            endDate
-        );
-    }
-
-    auto endLinear = high_resolution_clock::now();
-
-
-    long long timeLinear =
-        duration_cast<nanoseconds>(
-            endLinear - startLinear
-        ).count();
+    const double timeBinaryNs = measureNanosecondsPerQuery([&]() {
+        return binaryRangeQuery(data, startDate, endDate);
+    });
+    const double timeLinearNs = measureNanosecondsPerQuery([&]() {
+        return linearRangeQuery(data, startDate, endDate);
+    });
 
     //ket qua
 
-    double avgBinary =
-        (double)timeBinary / N_QUERIES;
-
-    double avgLinear =
-        (double)timeLinear / N_QUERIES;
-
     double speedup =
-        avgBinary > 0
-        ? avgLinear / avgBinary
+        timeBinaryNs > 0
+        ? timeLinearNs / timeBinaryNs
         : 0;
 
 
@@ -202,11 +178,11 @@ void benchmark(int n) {
 
     cout << "Binary Search: "
         << fixed << setprecision(2)
-        << avgBinary
+        << timeBinaryNs
         << " ns/query" << endl;
 
     cout << "Linear Scan: "
-        << avgLinear
+        << timeLinearNs
         << " ns/query" << endl;
 
     cout << "Speedup: "
@@ -214,17 +190,12 @@ void benchmark(int n) {
         << "x" << endl;
 
     cout << "So ket qua trong khoang: "
-        << binaryRangeQuery(
-            data,
-            startDate,
-            endDate
-        )
+        << binaryResult
         << endl;
 
     cout << "-----------------------------"
         << endl;
 
-    (void)checksum;
 }
 
 

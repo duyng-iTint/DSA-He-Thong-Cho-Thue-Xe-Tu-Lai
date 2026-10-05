@@ -107,10 +107,6 @@ const server = http.createServer(async (req, res) => {
         if (prefix.length < 2) return send(res, 200, { items: [] });
         return send(res, 200, { items: await runCoreJson('suggest', [prefix]), structure: 'Trie' });
       }
-      if (req.method === 'GET' && url.pathname === '/api/benchmark') {
-        const output = await runCore('benchmark', [url.searchParams.get('from') || '2026-01-01', url.searchParams.get('to') || '2026-12-31']);
-        return send(res, 200, { output });
-      }
       if (url.pathname === '/api/priority' && req.method === 'GET') {
         const args = priorityQueue.flatMap(item => [item.booking_id, item.membership_tier, item.booking_timestamp]);
         return send(res, 200, await runCoreJson('priority', args));

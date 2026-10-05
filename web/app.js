@@ -106,12 +106,6 @@ $('#process-priority').addEventListener('click', async () => {
   try { const result = await api('/api/priority/next', { method: 'POST' }); await refreshPriority(); notify(`Đang xử lý đơn ${result.next.booking_id} · hạng ${result.next.membership_tier}.`); }
   catch (error) { notify(error.message, true); }
 });
-$('#run-benchmark').addEventListener('click', async () => {
-  const button = $('#run-benchmark'); button.disabled = true; button.textContent = 'Đang đo…';
-  try { const result = await api('/api/benchmark'); $('#benchmark-output').textContent = result.output; $('#benchmark-output').hidden = false; }
-  catch (error) { notify(error.message, true); }
-  finally { button.disabled = false; button.textContent = 'Chạy benchmark'; }
-});
 document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => { document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active')); item.classList.add('active'); $('#crumb').textContent = item.textContent.trim(); }));
 refresh().catch(error => { $('#rentals-body').innerHTML = `<tr><td colspan="8" class="empty">${escapeHtml(error.message)}</td></tr>`; notify('Không thể tải dữ liệu từ máy chủ.', true); });
 refreshPriority().catch(error => notify(error.message, true));
