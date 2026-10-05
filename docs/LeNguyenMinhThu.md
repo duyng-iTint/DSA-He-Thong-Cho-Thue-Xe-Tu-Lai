@@ -564,6 +564,57 @@ Link commit:
 8. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/6d181ad251fb6e3c2bc4f47cc5c45614d4fd4d2d
 9. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/9a547bf5231fc33c27102569199b23d160a831bf
 10. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/f563224ccc956bc605f121d2d105e40a2db6c512
+
+# D5 — BỘ TEST TỰ ĐỘNG + BẰNG CHỨNG HIỆU NĂNG
+
+## 1. Automated Test
+
+Phần RF3 được kiểm thử tự động thông qua hàm `runAutomatedTests()`.
+
+Các trường hợp kiểm thử gồm:
+
+| Test | Nội dung kiểm tra | Kết quả |
+|---|---|---|
+| Test 1 | Kiểm tra Stack hoạt động theo LIFO | PASS |
+| Test 2 | Kiểm tra Pop khi Stack rỗng | PASS |
+| Test 3 | Kiểm tra Undo thao tác ADD | PASS |
+| Test 4 | Kiểm tra Undo thao tác UPDATE | PASS |
+| Test 5 | Kiểm tra Undo thao tác DELETE | PASS |
+| Test 6 | Kiểm tra Undo nhiều thao tác theo LIFO | PASS |
+| Test 7 | Kiểm tra ngày hợp lệ/không hợp lệ | PASS |
+
+Hàm `runAutomatedTests()` tự động chạy các test và tổng hợp kết quả.
+
+Ví dụ kết quả:
+
+```text
+====================================
+          AUTOMATED TEST
+====================================
+Test Stack LIFO     : PASS
+Test Pop Stack rong : PASS
+Test Undo ADD       : PASS
+Test Undo UPDATE    : PASS
+Test Undo DELETE    : PASS
+Test Undo LIFO      : PASS
+Test Valid Date     : PASS
+------------------------------------
+Ket qua: 7/7 test PASS
+====================================
+
+```
+## 2- Bằng chứng hiệu năng
+### Benchmark RF3
+
+### Benchmark RF3
+
+| Số bản ghi | Hash Table | Linear Search | Speedup |
+|---:|---:|---:|---:|
+| 1.000 | 0.08000 ms | 41.77230 ms | 522.2× |
+| 10.000 | 0.08780 ms | 464.04570 ms | 5,285.3× |
+| 100.000 | 0.01790 ms | 778.77830 ms | 43,507.2× |
+
+**Nhận xét:** Kết quả benchmark cho thấy Hash Table có thời gian tra cứu thấp và tương đối ổn định khi số lượng bản ghi tăng. Trong khi đó, Linear Search tăng theo quy mô dữ liệu. Speedup tăng từ 522.2× lên 43,507.2×, cho thấy hiệu quả của Hash Table trong việc tra cứu dữ liệu lớn.
 # D6 — ĐÁNH GIÁ KỸ THUẬT THÀNH VIÊN TRONG NHÓM
 
 ## 1. Thành phần được đánh giá
