@@ -779,8 +779,8 @@ cách kiểm thử.
 
 ### Link trao đổi AI
 
-[Link nhật ký trao đổi AI01](https://chatgpt.com/share/6ac24c67-e584-8  3ec-a506-459957a65bce)
+[Link nhật ký trao đổi AI01] (https://chatgpt.com/share/6ac24c67-e584-83ec-a506-459957a65bce)
 
-[Link nhật ký trao đổi AI02](https://chatgpt.com/share/6ac24ca5-f30c-83ec-b074-1202fa31aaef)
+[Link nhật ký trao đổi AI02] (https://chatgpt.com/share/6ac24ca5-f30c-83ec-b074-1202fa31aaef)
 
-[Link nhật ký trao đổi AI03](https://chatgpt.com/share/6ac24f60-5540-83ec-a7e4-95c620243996)
+[Link nhật ký trao đổi AI03] (https://chatgpt.com/share/6ac24f60-5540-83ec-a7e4-95c620243996)
