@@ -188,7 +188,6 @@ Lê Đức Thuần: RF1
 | **Đánh đổi và điều kiện làm nó không còn đúng** | Trie sử dụng nhiều node và con trỏ nên tốn bộ nhớ hơn cách lưu danh sách/mảng đơn giản. Việc chèn thêm các khóa phụ cho dòng xe cũng làm tăng số lượng node/đường đi trong Trie. `unordered_map` giúp quản lý các node con linh hoạt nhưng thứ tự duyệt không được đảm bảo, vì vậy kết quả phải được `sort()` lại theo A-Z. Lựa chọn Trie sẽ kém cần thiết nếu danh mục xe rất nhỏ và số lần tìm kiếm ít, khi đó duyệt tuyến tính có thể đơn giản hơn.                                                   |
 | **Nếu yêu cầu thay đổi thì sao**                | Nếu yêu cầu chỉ tìm theo tên đầy đủ và danh mục rất nhỏ, có thể chuyển sang danh sách/mảng kết hợp tìm tuyến tính. Nếu cần sắp xếp gợi ý theo **độ phổ biến**, Trie hiện tại cần bổ sung thông tin về số lượt sử dụng hoặc cơ chế ranking. Nếu cần tìm chuỗi ở giữa tên xe thay vì chỉ tìm theo prefix, hoặc hỗ trợ tìm kiếm gần đúng/sai chính tả, cần cân nhắc cấu trúc hoặc thuật toán tìm kiếm khác. Nếu cần hỗ trợ tiếng Việt có dấu một cách đầy đủ, hàm chuẩn hóa hiện tại cũng cần được mở rộng. |
 
-
 ---
 
 ## D4 — IMPLEMENTATION
