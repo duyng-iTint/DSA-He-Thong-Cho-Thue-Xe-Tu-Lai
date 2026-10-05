@@ -30,7 +30,7 @@ add_executable(BenchmarkMC1 benchmark/benchmark_mc1.cpp)
 target_include_directories(BenchmarkMC1 PRIVATE src/core/model src/core/structures src/core/services)
 target_link_libraries(BenchmarkMC1 PRIVATE core)
 
-add_executable(BenchmarkMC2 benchmark/benchmark_mc2.cpp)
+add_executable(BenchmarkMC2 benchmark/benchmark-MC2.cpp)
 target_link_libraries(BenchmarkMC2 PRIVATE core)
 
 enable_testing()
