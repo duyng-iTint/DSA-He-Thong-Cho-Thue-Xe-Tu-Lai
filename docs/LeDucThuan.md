@@ -458,6 +458,16 @@ Kết quả cuối cùng:
 ```text
 === TAT CA 8/8 UNIT TEST CASES DA PASS 100%! ===
 ```
+---
+
+### 11. Lịch sử commit
+Link commit 1: https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/4481e89694052b62fb9d9f7634b5fe00ae649a47
+
+Link commit 2: https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/3412e0b6680684cda98c40ff23c94e691ee96f3f
+
+Link commit 3: https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/cf35326aa6e1ae874cdadc7d11805981a8fe69cd
+
+Link commit 4: https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/bb0eb7c599f320f753cb6325be63a18cedfd0db2
 
 ---
 
