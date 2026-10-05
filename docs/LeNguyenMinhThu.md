@@ -55,23 +55,10 @@ Hệ thống quản lý cho thuê xe cần lưu các đơn thuê xe và cho phé
 * Khi Stack Undo rỗng, hệ thống không được xảy ra lỗi.
 * Mỗi thao tác ADD / UPDATE / DELETE phải lưu đủ thông tin để có thể khôi phục trạng thái cũ.
 
--- -
 
-# 2. Phân tích các yêu cầu
+# 2. RF3 — HOÀN TÁC THAO TÁC GẦN NHẤT
 
-| Requirement | Nội dung | Access pattern chính |
-| --- | --- | --- |
-| MC1 | Lấy một bản ghi từ mã | Tra cứu theo ID |
-| MC2 | Truy vấn theo thời gian / thống kê | Range / Statistics |
-| RF1 | Gợi ý hãng xe theo prefix | Prefix search |
-| RF2 | Xử lý tranh chấp đặt xe | Priority |
-| RF3 | Hoàn tác thao tác gần nhất | LIFO |
-
--- -
-
-# 3. RF3 — HOÀN TÁC THAO TÁC GẦN NHẤT
-
-## 3.1.Mô tả yêu cầu
+## 2.1.Mô tả yêu cầu
 
 RF3 cho phép hệ thống hoàn tác thao tác quản lý đơn thuê gần nhất.
 
@@ -116,7 +103,7 @@ Last In - First Out
 
 -- -
 
-## 3.2.Cấu trúc dữ liệu sử dụng
+## 2.2.Cấu trúc dữ liệu sử dụng
 
 Component cá nhân :
 
@@ -155,7 +142,7 @@ Action
 
 -- -
 
-## 3.3.Quy tắc Undo
+## 2.3.Quy tắc Undo
 
 ### Trường hợp ADD
 
@@ -254,7 +241,7 @@ position
 
 -- -
 
-## 3.4.Edge Cases
+## 2.4.Edge Cases
 
 * Stack Undo rỗng.
 * Chưa có thao tác nào nhưng người dùng chọn Undo.
@@ -274,7 +261,7 @@ position
 
 -- -
 
-## 3.5.Giả định và vấn đề cần làm rõ với nhóm
+## 2.5.Giả định và vấn đề cần làm rõ với nhóm
 
 ### Giả định
 
@@ -552,7 +539,41 @@ Do đó, lựa chọn `MyStack` xuất phát trực tiếp từ** access pattern
 
 Phần Automated Test và Benchmark được thực hiện để kiểm chứng tính đúng đắn và hiệu năng của component, nhưng được trình bày riêng trong phần công việc kiểm thử và đánh giá hiệu năng.
 # D4 - IMPLEMENTATION
-## 1. Lịch sử commit
+
+### 1. Cấu trúc mã nguồn
+
+- **Requirement:** RF3 – Hoàn tác thao tác tạo/sửa/xóa đơn thuê.
+- **Cấu trúc dữ liệu:** `MyStack`.
+- **Thành phần xử lý:** `UndoManager`.
+- **Branch:** `feature/rf3-undo-stack`.
+
+### 2. Chức năng đã cài đặt
+
+| STT | Chức năng | Mô tả |
+| --- | --------- | ----- |
+| 1 | `Push()` | Đưa thao tác vào Stack để lưu lịch sử |
+| 2 | `Pop()` | Lấy thao tác gần nhất ra khỏi Stack |
+| 3 | Undo `ADD` | Hoàn tác việc thêm đơn thuê |
+| 4 | Undo `UPDATE` | Khôi phục dữ liệu cũ thông qua `oldData` |
+| 5 | Undo `DELETE` | Khôi phục đơn thuê đã bị xóa |
+| 6 | Undo nhiều bước | Hoàn tác các thao tác theo nguyên tắc LIFO |
+| 7 | Kiểm tra ngày | Kiểm tra ngày bắt đầu và ngày kết thúc hợp lệ |
+
+### 3. Kiểm thử
+
+Phần RF3 có automated test cho:
+
+| STT | Test | Nội dung kiểm tra |
+| --- | ---- | ----------------- |
+| 1 | Stack LIFO | Phần tử đưa vào sau được lấy ra trước |
+| 2 | Pop Stack rỗng | Stack rỗng không gây lỗi |
+| 3 | Undo ADD | Bản ghi vừa thêm được xóa khi Undo |
+| 4 | Undo UPDATE | Dữ liệu được khôi phục về `oldData` |
+| 5 | Undo DELETE | Bản ghi bị xóa được khôi phục |
+| 6 | Undo theo LIFO | Nhiều thao tác được hoàn tác từ mới nhất đến cũ nhất |
+| 7 | Kiểm tra ngày | Ngày bắt đầu và ngày kết thúc hợp lệ |
+
+## 4. Lịch sử commit
 Link commit:
 1. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/c084f17c942221e8d74d1974ff3b1ff589750b01
 2. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/7ee191a21fa38963199648006c360243622afece
@@ -714,6 +735,7 @@ Một điểm cần lưu ý là search() có độ phức tạp O(1) trung bình
 Nhìn chung, MyHashTable phù hợp với yêu cầu MC1 – tra cứu chính xác theo mã định danh và có cơ sở để đánh giá hiệu năng thông qua benchmark với tìm kiếm tuyến tính.
 # D7 — NHẬT KÝ SỬ DỤNG AI& BÀI PHẢN TƯ CÁ NHÂN
 ## 1. Nhật ký sử dụng AI
+AI Assistant gồm: ChatGPT, Gemini
 
 | STT | Công cụ | Mục đích sử dụng | Phần công việc bị ảnh hưởng | Cách kiểm chứng |
 |---:|---|---|---|---|
@@ -741,7 +763,7 @@ Kiểm tra lại testUndoUpdate() để test trực tiếp trạng thái dữ li
 
 Qua quá trình kiểm chứng, em hiểu rõ hơn rằng AI chỉ là công cụ hỗ trợ; code thuộc tầng DSA Core cần được tự kiểm tra, hiểu và có khả năng giải thích khi bảo vệ.
 
-# 2. Bài phản tư cá nhân(Reflection)
+# 2. Bài phản tư cá nhân
 
 Trong quá trình thực hiện đồ án, phần em phụ trách là RF3 – hoàn tác thao tác tạo, sửa và xóa đơn thuê bằng Stack.Khó khăn lớn nhất ban đầu của em là hiểu cách chuyển yêu cầu Undo trong bài toán thực tế thành một mô hình dữ liệu có thể cài đặt được.
 

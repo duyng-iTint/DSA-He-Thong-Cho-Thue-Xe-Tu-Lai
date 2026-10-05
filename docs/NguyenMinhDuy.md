@@ -1597,6 +1597,11 @@ AI không được xem là nguồn thay thế cho quá trình tự cài đặt v
 ### Link trao đổi AI
 ---
 
+https://share.gemini.google/zlSsJcsZ1gJ4
+https://chatgpt.com/s/t_6ac3847049f881919e64ab56bd9604e2 (Tổng quan về quy trình làm của cả nhóm để hiểu rõ hơn về hệ thống)
+
+
+
 
 
 ---

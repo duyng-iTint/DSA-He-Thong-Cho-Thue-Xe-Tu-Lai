@@ -183,12 +183,6 @@ int main(int argc, char** argv) {
         for (std::size_t i = 0; i < result.size(); ++i) { if (i) std::cout << ','; std::cout << json(result[i]); }
         std::cout << ']'; return 0;
     }
-    if (command == "benchmark") {
-        RentalService::sortByRentDate(records);
-        std::string from = argc >= 4 ? argv[3] : "2026-01-01";
-        std::string to = argc >= 5 ? argv[4] : "2026-12-31";
-        RentalService::benchmarkRangeQuery(records, from, to); return 0;
-    }
     if (command == "stats") {
         const auto tableStats = byId.stats();
         int active = 0, returned = 0, cancelled = 0;

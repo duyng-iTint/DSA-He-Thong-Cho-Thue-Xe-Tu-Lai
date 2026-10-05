@@ -31,14 +31,20 @@ Stop-Process -Id (Get-NetTCPConnection -LocalPort 127.0.0.1:3000).OwningProcess 
 - Xếp yêu cầu tranh chấp theo hạng thành viên và thời điểm: `MyMaxHeap` RF2.
 - Danh sách, tra cứu, thêm/sửa/xóa: Node chỉ chuyển HTTP; `RentalWebCore` gọi `RentalSystem`, `MyHashTable` và `Persistence` để xử lý.
 - Undo: hoàn nguyên snapshot qua `Persistence` Core; lịch sử Undo nằm trong phiên máy chủ.
-- Benchmark: gọi `RentalService::benchmarkRangeQuery`.
+- Benchmark MC1, MC2 và RF2 chạy bằng executable CMake riêng, không chạy trong giao diện web. Xem bảng target và lệnh chạy trong README gốc.
 - Tạo đơn, sửa, tìm, lọc và xếp ưu tiên có API JSON tại `/api`.
 
 Schema CSV chuẩn có đúng thứ tự: `booking_id,bien_so,ten_khach,hang_xe,dong_xe,ngay_bat_dau,ngay_ket_thuc,trang_thai,gia_tien,hang_thanh_vien,thoi_diem_dat`. Các header MC1 8 cột cũ và MC2 9 cột cũ vẫn được đọc, sau đó chuẩn hóa khi ghi. Bản `data/donthue_xe.csv` hiện đã được chuyển schema; giá/hạng/thời điểm cũ không có dữ liệu được đặt về `0`. Có thể trỏ server vào bản dữ liệu khác bằng `RENTAL_DATA_FILE`.
 
 ## CLI C++
 
-CMake cũng tạo `CarRentalApp` (RF3, test và benchmark MC1), `RentalMC2Demo`, `RentalMC1Demo` và `BenchmarkMC1` để chạy các presentation/benchmark riêng bên cạnh web.
+CMake có target chạy riêng cho CLI, test và benchmark: `CarRentalApp`, `RentalMC1Demo`, `RentalMC2Demo`, `RentalRF1Demo`, `DemoRF2Heap`, `BenchmarkMC1`, `BenchmarkMC2`, `BenchmarkRF2`, `TestMC1Persistence`, `TestMC2Correctness` và `TestRF1Trie`. Dùng `run_<target>` để build rồi chạy, ví dụ:
+
+```powershell
+cmake --build build/web-integration --config Release --target run_BenchmarkMC1
+cmake --build build/web-integration --config Release --target run_BenchmarkMC2
+cmake --build build/web-integration --config Release --target run_BenchmarkRF2
+```
 
 ## Giới hạn dữ liệu nghiệp vụ
 

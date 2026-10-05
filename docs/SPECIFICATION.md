@@ -197,7 +197,6 @@ Web mặc định bind `127.0.0.1:3000`. API trả JSON. Các route hiện có:
 | GET | `/api/stats` | — | Tổng đơn, số đơn theo trạng thái, Top hãng/dòng và Top biển số |
 | GET | `/api/top-cars?limit=5` | `limit` từ 1 đến 20 | Top xe theo biển số/lượt thuê |
 | GET | `/api/suggest?prefix=...` | prefix tối thiểu 2 ký tự | Gợi ý Trie |
-| GET | `/api/benchmark?from=...&to=...` | khoảng ngày tùy chọn | Chạy benchmark Range Query hiện có trong Core |
 | GET | `/api/priority` | — | Trả heap hiện tại dưới dạng danh sách ưu tiên |
 | POST | `/api/priority` | `booking_id`, `membership_tier`?, `booking_timestamp`? | Thêm yêu cầu vào heap; mặc định lấy hạng/thời điểm từ đơn hoặc thời gian hiện tại |
 | POST | `/api/priority/next` | — | Lấy và loại yêu cầu ưu tiên nhất khỏi hàng đợi |
@@ -284,6 +283,8 @@ ctest --test-dir build/web-integration -C Release --output-on-failure
 
 Các bài test chưa đăng ký với CTest, gồm RF2 demo trong `test/test_thanhvien3.cpp` và Automated test RF3 gọi từ menu `CarRentalApp` mục 9.
 
+Các executable CLI, test và benchmark có target `run_<target>` để build rồi chạy trực tiếp. Danh sách đầy đủ gồm `run_CarRentalApp`, `run_RentalMC1Demo`, `run_RentalMC2Demo`, `run_RentalRF1Demo`, `run_DemoRF2Heap`, `run_BenchmarkMC1`, `run_BenchmarkMC2`, `run_BenchmarkRF2`, `run_TestMC1Persistence`, `run_TestMC2Correctness` và `run_TestRF1Trie`. Xem README gốc để biết chức năng từng target. File `.cpp` không có `main()` là module thư viện và được liên kết vào các chương trình này.
+
 ### Benchmark MC2
 
 ```powershell
@@ -330,7 +331,7 @@ Mở `http://localhost:3000`; nhấn `Ctrl+C` trong terminal để dừng. Hư�
 | `test/test_thanhvien3.cpp` | Chương trình demo/test heap RF2 |
 | `test/Tests.cpp` | Automated tests RF3 |
 | `benchmark/benchmark_mc1.cpp` | Benchmark MC1 |
-| `benchmark/benchmark_mc2.cpp` | Benchmark độc lập Range Query MC2 |
+| `benchmark/benchmark-MC2.cpp` | Benchmark độc lập Range Query MC2 |
 | `benchmark/benchmark_rf2.cpp` | Benchmark heap RF2 |
 
 ## 10. Giới hạn hiện tại

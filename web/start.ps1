@@ -4,7 +4,7 @@ $build = Join-Path $root 'build/web-integration'
 
 cmake -S $root -B $build
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-cmake --build $build --config Release --target RentalWebCore CarRentalApp RentalMC2Demo RentalMC1Demo BenchmarkMC1 -j 4
+cmake --build $build --config Release --target RentalWebCore -j 4
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 $candidates = @(
