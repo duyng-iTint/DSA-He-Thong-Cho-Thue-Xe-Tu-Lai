@@ -563,6 +563,7 @@ Link commit:
 7. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/33d8f224847c8dd42c96fee5f3d6b3b3fb9d31af
 8. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/6d181ad251fb6e3c2bc4f47cc5c45614d4fd4d2d
 9. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/9a547bf5231fc33c27102569199b23d160a831bf
+10. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/f563224ccc956bc605f121d2d105e40a2db6c512
 # D6 — ĐÁNH GIÁ KỸ THUẬT THÀNH VIÊN TRONG NHÓM
 
 ## 1. Thành phần được đánh giá
