@@ -9,7 +9,7 @@
 //     ./demo_mc1
 //
 // Chuc nang demo:
-// 1. Nap du lieu tu donthue_xe.csv (neu chua co thi tu sinh 1.000 dong).
+// 1. Nap du lieu tu data/donthue_xe.csv (neu chua co thi tu sinh 1.000 dong).
 // 2. Cho nguoi dung tra cuu theo Booking_ID hoac bien so.
 // 3. Cho phep them 1 don thue moi roi luu lai ra CSV.
 
@@ -17,13 +17,13 @@
 #include <fstream>
 #include <string>
 
-#include "Booking.h"
-#include "MyHashTable.h"
-#include "Persistence.h"
-#include "DataGenerator.h"
+#include "../core/model/Booking.h"
+#include "../core/structures/MyHashTable.h"
+#include "../core/services/Persistence.h"
+#include "../core/services/DataGenerator.h"
 
 namespace {
-const std::string CSV_PATH = "donthue_xe.csv";
+const std::string CSV_PATH = "data/donthue_xe.csv";
 
 bool fileExists(const std::string& path) {
     std::ifstream f(path);
@@ -33,8 +33,8 @@ bool fileExists(const std::string& path) {
 
 int main() {
     if (!fileExists(CSV_PATH)) {
-        std::cout << "Chua co " << CSV_PATH << ", tu sinh 1.000 ban ghi gia lap...\n";
-        generateCsv(CSV_PATH, 1000);
+        std::cout << "Chua co " << CSV_PATH << ", tu sinh 10.000 ban ghi gia lap...\n";
+        generateCsv(CSV_PATH, 10000);
     }
 
     PersistenceContext ctx;

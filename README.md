@@ -49,7 +49,7 @@ Hệ thống được tổ chức thành 3 tầng:
 │               PERSISTENCE                 │
 │                                           │
 │ CSV Load / Save                           │
-│ donthue_xe.csv                            │
+│ data/donthue_xe.csv                       │
 └───────────────────────────────────────────┘
 ```
 
@@ -89,3 +89,20 @@ car-rental-dsa/
     ├── benchmark/ 
     └── screenshots/
 ```
+
+## Chạy bản web tích hợp
+
+Trên Windows, chạy `./web/start.ps1`. Script build các chương trình C++ bằng CMake rồi chạy web tại `http://localhost:3000`.
+
+Web dùng API Node.js làm presentation adapter và gọi `RentalWebCore` để kết nối `Persistence`, `MyHashTable`, `RentalSystem`, `RentalService`, Trie và `MyMaxHeap`. Dữ liệu đơn thuê được lưu trong `data/donthue_xe.csv`.
+
+Schema CSV chuẩn: `booking_id,bien_so,ten_khach,hang_xe,dong_xe,ngay_bat_dau,ngay_ket_thuc,trang_thai,gia_tien,hang_thanh_vien,thoi_diem_dat`. Persistence hỗ trợ đọc hai định dạng CSV cũ của MC1 và MC2 rồi ghi lại theo schema chuẩn.
+
+Các target CMake riêng:
+
+- `CarRentalApp`: CLI quản lý và Undo RF3, test, benchmark MC1.
+- `RentalMC2Demo`: CLI truy vấn ngày, top xe và benchmark MC2.
+- `RentalMC1Demo`, `BenchmarkMC1`: demo và benchmark MC1.
+- `RentalWebCore`: cầu nối DSA Core cho giao diện web.
+
+Chi tiết endpoint và giới hạn dữ liệu RF2/Undo trong phiên xem [web/README.md](web/README.md).

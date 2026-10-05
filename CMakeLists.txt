@@ -1,36 +1,41 @@
 cmake_minimum_required(VERSION 3.16)
-
-project(DSA-He-Thong-Cho-Thue-Xe-Tu-Lai)
+project(DSAHeThongChoThueXe LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(
-    src
-    src/core
-    src/core/structures
-    src/core/model
-    src/core/services
-    src/core/algorithms
-)
-
-# Gom toan bo file .cpp trong src/core thanh thu vien dung chung
-file(GLOB_RECURSE CORE_SOURCES src/core/*.cpp)
+file(GLOB_RECURSE CORE_SOURCES CONFIGURE_DEPENDS src/core/*.cpp)
 add_library(core STATIC ${CORE_SOURCES})
 
-# Thu vien sinh du lieu (nam trong test/)
-add_library(datagen STATIC test/DataGenerator.cpp)
-target_include_directories(datagen PUBLIC test)
-target_link_libraries(datagen PUBLIC core)
+add_executable(CarRentalApp
+    src/presentation/MainRF3.cpp
+    src/presentation/InputHandler.cpp
+    test/Tests.cpp
+    benchmark/Benchmark.cpp
+)
+target_include_directories(CarRentalApp PRIVATE src)
+target_link_libraries(CarRentalApp PRIVATE core)
 
-# Chuong trinh demo MC1
-add_executable(demo_mc1 src/presentation/demo_mc1.cpp)
-target_link_libraries(demo_mc1 datagen)
+# Adapter de web presentation goi truc tiep cac DSA Core C++.
+add_executable(RentalWebCore web/core_bridge.cpp)
+target_link_libraries(RentalWebCore PRIVATE core)
 
-# Chuong trinh test cua Thanh vien 1
-add_executable(test_mc1 test/test_thanhvien1.cpp)
-target_link_libraries(test_mc1 datagen)
+add_executable(RentalMC2Demo src/presentation/mainMC1.cpp)
+target_link_libraries(RentalMC2Demo PRIVATE core)
 
-# Chuong trinh benchmark MC1
-add_executable(benchmark_mc1 benchmark/benchmark_mc1.cpp)
-target_link_libraries(benchmark_mc1 datagen)
+add_executable(RentalMC1Demo src/presentation/demo_mc1.cpp)
+target_link_libraries(RentalMC1Demo PRIVATE core)
+
+add_executable(BenchmarkMC1 benchmark/benchmark_mc1.cpp)
+target_include_directories(BenchmarkMC1 PRIVATE src/core/model src/core/structures src/core/services)
+target_link_libraries(BenchmarkMC1 PRIVATE core)
+
+enable_testing()
+add_executable(TestMC2Correctness test/test_correctness.cpp)
+target_link_libraries(TestMC2Correctness PRIVATE core)
+add_test(NAME TestMC2Correctness COMMAND TestMC2Correctness)
+
+add_executable(TestMC1Persistence test/test_thanhvien1.cpp)
+target_include_directories(TestMC1Persistence PRIVATE src/core/model src/core/structures src/core/services)
+target_link_libraries(TestMC1Persistence PRIVATE core)
+add_test(NAME TestMC1Persistence COMMAND TestMC1Persistence)

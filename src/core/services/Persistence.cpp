@@ -2,31 +2,9 @@
 #include "Persistence.h"
 
 #include <fstream>
-#include <sstream>
+#include "CsvCodec.h"
 
 namespace {
-
-// Tach 1 dong CSV don gian theo dau phay (khong xu ly truong hop co
-// dau phay/nhay kep trong du lieu - dung voi du lieu giả lap cua bai
-// nay vi cac truong khong chua dau phay).
-std::vector<std::string> splitCsvLine(const std::string& line) {
-    std::vector<std::string> result;
-    std::string field;
-    std::istringstream ss(line);
-    while (std::getline(ss, field, ',')) {
-        result.push_back(field);
-    }
-    return result;
-}
-
-std::string joinCsvRow(const std::vector<std::string>& row) {
-    std::ostringstream oss;
-    for (std::size_t i = 0; i < row.size(); ++i) {
-        if (i > 0) oss << ',';
-        oss << row[i];
-    }
-    return oss.str();
-}
 
 } // namespace
 
@@ -40,19 +18,17 @@ int loadIntoHashTable(const std::string& csvPath,
     }
 
     std::string line;
-    bool isHeader = true;
+    std::vector<std::string> header;
     int count = 0;
 
     while (std::getline(in, line)) {
         if (line.empty()) continue;
-        if (isHeader) { // bo qua dong tieu de
-            isHeader = false;
-            continue;
-        }
-        std::vector<std::string> row = splitCsvLine(line);
+        if (header.empty()) { header = CsvCodec::parseRow(line); continue; }
+        std::vector<std::string> row = CsvCodec::parseRow(line);
         if (row.empty()) continue;
 
-        Booking booking = Booking::fromRow(row);
+        Booking booking = Booking::fromCsvRow(row, header);
+        if (booking.booking_id.empty()) continue;
         Booking* ptr = ctx.addBooking(booking); // storage so huu object that
 
         tableById.insert(ptr->booking_id, ptr);
@@ -67,10 +43,10 @@ int saveFromHashTable(const std::string& csvPath,
     std::ofstream out(csvPath, std::ios::trunc);
     int count = 0;
 
-    out << joinCsvRow(Booking::header()) << "\n";
+    out << CsvCodec::encodeRow(Booking::header()) << "\n";
     for (const auto& kv : tableById.allItems()) {
         const Booking* b = kv.second;
-        out << joinCsvRow(b->toRow()) << "\n";
+        out << CsvCodec::encodeRow(b->toRow()) << "\n";
         ++count;
     }
     return count;
