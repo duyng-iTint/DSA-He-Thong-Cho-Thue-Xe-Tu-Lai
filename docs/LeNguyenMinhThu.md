@@ -551,7 +551,7 @@ UPDATE B001
 Do đó, lựa chọn `MyStack` xuất phát trực tiếp từ** access pattern của RF3**, thay vì chọn cấu trúc dữ liệu chỉ dựa trên thói quen hoặc tính phổ biến.
 
 Phần Automated Test và Benchmark được thực hiện để kiểm chứng tính đúng đắn và hiệu năng của component, nhưng được trình bày riêng trong phần công việc kiểm thử và đánh giá hiệu năng.
-# D4 - Mã nguồn (3 tầng, ≥2 cấu trúc tự cài đặt, có test), lịch sử commit gắn với từng thành viên
+# D4 - IMPLEMENTATION
 ## 1. Lịch sử commit
 Link commit:
 1. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/c084f17c942221e8d74d1974ff3b1ff589750b01
