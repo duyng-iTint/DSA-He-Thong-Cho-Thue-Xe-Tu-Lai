@@ -748,7 +748,7 @@ https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/001f7c1740
 
 https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/82cdf08e4915e84a0e4d8ea00dfa35ba5aaeafee
 
-
+https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/ca5208edf4240575242b6af43c7941545920f803
 
 
 ---
@@ -1574,9 +1574,7 @@ Trong quá trình thực hiện đồ án, em sử dụng AI như một công c�
 
 
 
-Vai trò của AI trong quá trình thực hiện
-
-AI chủ yếu đóng vai trò:
+Trong quá trình thực hiện AI chủ yếu đóng vai trò:
 
 ```
 Phân tích vấn đề
@@ -1589,22 +1587,12 @@ Hỗ trợ tìm lỗi
       ↓
 Đề xuất Test Case
       ↓
-Em tự triển khai và kiểm chứng
+Triển khai và kiểm chứng
 ```
 
-AI không được xem là nguồn thay thế cho quá trình tự cài đặt và kiểm thử. Các kết quả được sử dụng trong báo cáo đều được đối chiếu với source code và kết quả chạy thực tế của chương trình.
-
-### Link trao đổi AI
----
-
-https://share.gemini.google/zlSsJcsZ1gJ4
-https://chatgpt.com/s/t_6ac3847049f881919e64ab56bd9604e2 (Tổng quan về quy trình làm của cả nhóm để hiểu rõ hơn về hệ thống)
 
 
 
-
-
----
 
 # 8. TỔNG KẾT ĐÓNG GÓP CÁ NHÂN
 
@@ -1629,12 +1617,10 @@ MC2
 ├── Range Query
 │   └── O(log N + k)
 │
-├── Top Rented Cars
-│   ├── buildCarStats()
-│   └── topRentedCars()
-│
-└── Benchmark
-    └── Binary Search vs Linear Scan
+└── Top Rented Cars
+    ├── buildCarStats()
+    └── topRentedCars()
+
 ```
 
 MC2 đáp ứng access pattern cần dữ liệu có thứ tự của đồ án. Sau khi bulk load và sắp xếp dữ liệu, hệ thống có thể sử dụng Binary Search để xác định nhanh phạm vi truy vấn thay vì quét toàn bộ dữ liệu.
