@@ -177,6 +177,19 @@ Trie được chọn vì access pattern chính của RF1 là **tìm kiếm theo 
 Việc sử dụng `sort()` sau khi thu thập kết quả giúp đảm bảo output có thứ tự A-Z ổn định, mặc dù `children` được lưu bằng `unordered_map`.
 
 ---
+## Biện minh cá nhân: Thành viên 4 - RF1
+Lê Đức Thuần: RF1
+
+| Nội dung                                        | Biện minh                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Thành phần sở hữu**                           | **RF1 — Tính năng Autocomplete gợi ý tên hãng/dòng xe**, bao gồm component `CarTrie`, implementation trong `Trie.h` và bộ kiểm thử `TrieTest.cpp`. Thành phần này chịu trách nhiệm tìm kiếm xe theo tiền tố và trả về danh sách tên xe phù hợp.                                                                                                                                                                                                                                                          |
+| **Yêu cầu mình phân tích**                      | RF1 cần hỗ trợ người dùng nhập một phần tên hãng hoặc dòng xe và nhận được các gợi ý tương ứng. Truy vấn được thực hiện nhiều lần khi người dùng gõ từng ký tự. Ngoài ra, hệ thống cần xử lý chữ hoa/chữ thường, khoảng trắng đầu/cuối, prefix không tồn tại và trường hợp một prefix khớp với nhiều xe. Kết quả cần có thứ tự từ điển A-Z để hiển thị ổn định.                                                                                                                                          |
+| **Quyết định thiết kế mình bảo vệ**             | Mình lựa chọn **Trie (cây tiền tố)** vì access pattern chính của RF1 là tìm kiếm theo prefix. Trie cho phép đi từ node gốc theo từng ký tự của prefix với chi phí `O(L)`, trong đó `L` là độ dài prefix. Sau khi tìm được node tương ứng, hệ thống duyệt cây con để thu thập các tên xe phù hợp. Implementation sử dụng `normalize()` để chuẩn hóa input, đồng thời chèn cả tên đầy đủ và các khóa dòng xe để người dùng có thể tìm trực tiếp bằng tên model, ví dụ `inno` → `Toyota Innova`.            |
+| **Đánh đổi và điều kiện làm nó không còn đúng** | Trie sử dụng nhiều node và con trỏ nên tốn bộ nhớ hơn cách lưu danh sách/mảng đơn giản. Việc chèn thêm các khóa phụ cho dòng xe cũng làm tăng số lượng node/đường đi trong Trie. `unordered_map` giúp quản lý các node con linh hoạt nhưng thứ tự duyệt không được đảm bảo, vì vậy kết quả phải được `sort()` lại theo A-Z. Lựa chọn Trie sẽ kém cần thiết nếu danh mục xe rất nhỏ và số lần tìm kiếm ít, khi đó duyệt tuyến tính có thể đơn giản hơn.                                                   |
+| **Nếu yêu cầu thay đổi thì sao**                | Nếu yêu cầu chỉ tìm theo tên đầy đủ và danh mục rất nhỏ, có thể chuyển sang danh sách/mảng kết hợp tìm tuyến tính. Nếu cần sắp xếp gợi ý theo **độ phổ biến**, Trie hiện tại cần bổ sung thông tin về số lượt sử dụng hoặc cơ chế ranking. Nếu cần tìm chuỗi ở giữa tên xe thay vì chỉ tìm theo prefix, hoặc hỗ trợ tìm kiếm gần đúng/sai chính tả, cần cân nhắc cấu trúc hoặc thuật toán tìm kiếm khác. Nếu cần hỗ trợ tiếng Việt có dấu một cách đầy đủ, hàm chuẩn hóa hiện tại cũng cần được mở rộng. |
+
+
+---
 
 ## D4 — IMPLEMENTATION
 
@@ -784,3 +797,10 @@ Debug / Verification
 ```
 
 Qua RF1, em hiểu rõ hơn cách biến một yêu cầu chức năng cụ thể thành một component DSA có thể kiểm thử và tích hợp vào hệ thống.
+
+---
+
+### Link trao đổi AI
+Link trao đổi AI1: https://share.gemini.google/9NhWS0FxQQPt
+
+Link trao đổi AI2: https://share.gemini.google/zUnKPP9FhLiQ
