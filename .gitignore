@@ -1,0 +1,36 @@
+# Build
+build/
+cmake-build-*/
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.out
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# VS Code
+.vscode/
+
+# Code::Blocks
+*.cbp
+*.depend
+*.layout
+
+# CLion
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
