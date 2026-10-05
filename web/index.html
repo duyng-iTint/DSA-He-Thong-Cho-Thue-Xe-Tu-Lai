@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f4">
+  <title>Đội xe — Quản lý thuê xe tự lái</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview"><span class="brand-mark">R</span><span>roadwise<small>FLEET MANAGEMENT</small></span></a>
+    <div class="nav-label">KHÔNG GIAN LÀM VIỆC</div>
+    <a class="nav-item active" href="#overview"><span>▦</span> Tổng quan</a>
+    <a class="nav-item" href="#rentals"><span>▤</span> Đơn thuê <span class="nav-count" id="nav-count">—</span></a>
+    <div class="sidebar-bottom"><div class="connection-dot"></div><div><b>Hệ thống hoạt động</b><small>CSV · Local API</small></div></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><div class="breadcrumb">Đội xe <span>/</span> <b id="crumb">Tổng quan</b></div><div class="today" id="today"></div></header>
+    <section class="page-heading" id="overview">
+      <div><div class="eyebrow">BẢNG ĐIỀU KHIỂN</div><h1>Chào bạn, <span>đây là tình hình đội xe.</span></h1><p>Theo dõi đơn thuê và vận hành từ một nơi.</p></div>
+      <button class="button primary" id="new-booking"><span>＋</span> Tạo đơn thuê</button>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card"><div class="stat-top"><span>Tổng đơn thuê</span><span class="stat-icon blue">▤</span></div><strong id="stat-total">—</strong><small>Tất cả đơn trong hệ thống</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Đang cho thuê</span><span class="stat-icon green">↗</span></div><strong id="stat-active">—</strong><small>Đơn có trạng thái đang thuê</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Đã hoàn tất</span><span class="stat-icon violet">✓</span></div><strong id="stat-returned">—</strong><small>Xe đã được khách trả</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Đã hủy</span><span class="stat-icon amber">↶</span></div><strong id="stat-cancelled">—</strong><small>Đơn đã hủy</small></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel table-panel" id="rentals">
+        <div class="panel-heading"><div><h2>Đơn thuê gần đây</h2><p>Tra cứu và quản lý các đơn thuê xe.</p></div><button class="button subtle" id="undo-button" title="Hoàn tác thao tác gần nhất">↶ <span>Hoàn tác</span></button></div>
+        <div class="toolbar"><label class="search"><span>⌕</span><input id="search" list="search-suggestions" placeholder="Tìm mã đơn, biển số, khách hàng…"><datalist id="search-suggestions"></datalist><button class="button subtle exact-search" id="exact-search">Tra mã / biển số</button></label><div class="date-filter"><label>Từ <input id="date-from" type="date"></label><label>Đến <input id="date-to" type="date"></label></div></div>
+        <div class="table-wrap"><table><thead><tr><th>MÃ ĐƠN</th><th>XE</th><th>KHÁCH HÀNG</th><th>THỜI GIAN THUÊ</th><th>GIÁ THUÊ</th><th>HẠNG</th><th>TRẠNG THÁI</th><th></th></tr></thead><tbody id="rentals-body"><tr><td colspan="8" class="empty">Đang tải dữ liệu…</td></tr></tbody></table></div>
+        <div class="table-footer"><span id="result-count">—</span><span>Dữ liệu lưu tại <code>data/donthue_xe.csv</code></span></div>
+      </article>
+      <aside class="panel popular-panel"><div class="panel-heading"><div><h2>Dòng xe phổ biến</h2><p>Số đơn thuê theo hãng và dòng xe.</p></div><span class="mini-icon">↗</span></div><div id="top-cars" class="top-cars"></div><div class="insight"><span>✦</span><p>Số liệu được tổng hợp trực tiếp từ danh sách đơn thuê.</p></div></aside>
+    </section>
+    <section class="panel priority-panel">
+      <div class="panel-heading"><div><h2>Hàng đợi yêu cầu ưu tiên</h2><p>RF2 · Max-Heap xử lý hạng thành viên cao trước, sau đó theo thời điểm đặt.</p></div><button class="button subtle" id="process-priority">Xử lý yêu cầu đầu</button></div>
+      <form id="priority-form" class="priority-form"><label>Mã đơn<input name="booking_id" placeholder="RENT_HCM_001001" required></label><label>Hạng thành viên<select name="membership_tier"><option value="">Tự lấy từ đơn</option><option value="0">0 · Cơ bản</option><option value="1">1 · Bạc</option><option value="2">2 · Vàng</option><option value="3">3 · Kim cương</option></select></label><button class="button primary" type="submit">＋ Thêm vào hàng đợi</button></form>
+      <div id="priority-result" class="priority-result">Hàng đợi ưu tiên đang trống.</div>
+    </section>
+    <footer>ROADWISE <span>·</span> HỆ THỐNG QUẢN LÝ CHO THUÊ XE TỰ LÁI</footer>
+  </main>
+
+  <dialog id="booking-dialog">
+    <form id="booking-form">
+      <div class="dialog-heading"><div><div class="eyebrow">QUẢN LÝ ĐƠN</div><h2 id="dialog-title">Tạo đơn thuê mới</h2></div><button type="button" class="close" id="close-dialog">×</button></div>
+      <div class="form-grid">
+        <label>Mã đơn thuê<input name="booking_id" placeholder="VD: RENT_HCM_001001" required></label>
+        <label>Biển số xe<input name="bien_so" placeholder="51A-123.45" required></label>
+        <label class="span-two">Tên khách hàng<input name="ten_khach" placeholder="Nhập tên khách hàng" required></label>
+        <label>Hãng xe<input name="hang_xe" list="brands" placeholder="Toyota" required><datalist id="brands"><option>Toyota</option><option>Hyundai</option><option>Honda</option><option>Kia</option><option>Ford</option><option>Mitsubishi</option><option>Mazda</option><option>VinFast</option></datalist></label>
+        <label>Dòng xe<input name="dong_xe" placeholder="Vios" required></label>
+        <label>Ngày bắt đầu<input name="ngay_bat_dau" type="date" required></label>
+        <label>Ngày kết thúc<input name="ngay_ket_thuc" type="date" required></label>
+        <label>Giá thuê (VND)<input name="gia_tien" type="number" min="0" step="1000" value="0"></label>
+        <label>Hạng thành viên<select name="hang_thanh_vien"><option value="0">0 · Cơ bản</option><option value="1">1 · Bạc</option><option value="2">2 · Vàng</option><option value="3">3 · Kim cương</option></select></label>
+        <label class="span-two">Trạng thái<select name="trang_thai"><option value="DANG_THUE">Đang thuê</option><option value="DA_TRA">Đã trả</option><option value="DA_HUY">Đã hủy</option></select></label>
+      </div>
+      <div class="dialog-actions"><button class="button subtle" type="button" id="cancel-dialog">Hủy</button><button class="button primary" type="submit" id="save-button">Lưu đơn thuê</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
