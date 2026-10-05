@@ -161,6 +161,8 @@ public:
         }
 
         collectAllWords(current, results);
+        // Sắp xếp lại theo thứ tự từ điển A-Z để đảm bảo đáp ứng chuẩn yêu cầu Q1
+        sort(results.begin(), results.end());
         return results;
     }
 
