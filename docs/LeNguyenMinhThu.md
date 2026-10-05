@@ -735,6 +735,7 @@ Một điểm cần lưu ý là search() có độ phức tạp O(1) trung bình
 Nhìn chung, MyHashTable phù hợp với yêu cầu MC1 – tra cứu chính xác theo mã định danh và có cơ sở để đánh giá hiệu năng thông qua benchmark với tìm kiếm tuyến tính.
 # D7 — NHẬT KÝ SỬ DỤNG AI& BÀI PHẢN TƯ CÁ NHÂN
 ## 1. Nhật ký sử dụng AI
+AI Assistant gồm: ChatGPT, Gemini
 
 | STT | Công cụ | Mục đích sử dụng | Phần công việc bị ảnh hưởng | Cách kiểm chứng |
 |---:|---|---|---|---|
@@ -762,7 +763,7 @@ Kiểm tra lại testUndoUpdate() để test trực tiếp trạng thái dữ li
 
 Qua quá trình kiểm chứng, em hiểu rõ hơn rằng AI chỉ là công cụ hỗ trợ; code thuộc tầng DSA Core cần được tự kiểm tra, hiểu và có khả năng giải thích khi bảo vệ.
 
-# 2. Bài phản tư cá nhân(Reflection)
+# 2. Bài phản tư cá nhân
 
 Trong quá trình thực hiện đồ án, phần em phụ trách là RF3 – hoàn tác thao tác tạo, sửa và xóa đơn thuê bằng Stack.Khó khăn lớn nhất ban đầu của em là hiểu cách chuyển yêu cầu Undo trong bài toán thực tế thành một mô hình dữ liệu có thể cài đặt được.
 
