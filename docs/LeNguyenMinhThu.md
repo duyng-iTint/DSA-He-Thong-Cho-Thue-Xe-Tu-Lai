@@ -55,23 +55,10 @@ Hệ thống quản lý cho thuê xe cần lưu các đơn thuê xe và cho phé
 * Khi Stack Undo rỗng, hệ thống không được xảy ra lỗi.
 * Mỗi thao tác ADD / UPDATE / DELETE phải lưu đủ thông tin để có thể khôi phục trạng thái cũ.
 
--- -
 
-# 2. Phân tích các yêu cầu
+# 2. RF3 — HOÀN TÁC THAO TÁC GẦN NHẤT
 
-| Requirement | Nội dung | Access pattern chính |
-| --- | --- | --- |
-| MC1 | Lấy một bản ghi từ mã | Tra cứu theo ID |
-| MC2 | Truy vấn theo thời gian / thống kê | Range / Statistics |
-| RF1 | Gợi ý hãng xe theo prefix | Prefix search |
-| RF2 | Xử lý tranh chấp đặt xe | Priority |
-| RF3 | Hoàn tác thao tác gần nhất | LIFO |
-
--- -
-
-# 3. RF3 — HOÀN TÁC THAO TÁC GẦN NHẤT
-
-## 3.1.Mô tả yêu cầu
+## 2.1.Mô tả yêu cầu
 
 RF3 cho phép hệ thống hoàn tác thao tác quản lý đơn thuê gần nhất.
 
@@ -116,7 +103,7 @@ Last In - First Out
 
 -- -
 
-## 3.2.Cấu trúc dữ liệu sử dụng
+## 2.2.Cấu trúc dữ liệu sử dụng
 
 Component cá nhân :
 
@@ -155,7 +142,7 @@ Action
 
 -- -
 
-## 3.3.Quy tắc Undo
+## 2.3.Quy tắc Undo
 
 ### Trường hợp ADD
 
@@ -254,7 +241,7 @@ position
 
 -- -
 
-## 3.4.Edge Cases
+## 2.4.Edge Cases
 
 * Stack Undo rỗng.
 * Chưa có thao tác nào nhưng người dùng chọn Undo.
@@ -274,7 +261,7 @@ position
 
 -- -
 
-## 3.5.Giả định và vấn đề cần làm rõ với nhóm
+## 2.5.Giả định và vấn đề cần làm rõ với nhóm
 
 ### Giả định
 
