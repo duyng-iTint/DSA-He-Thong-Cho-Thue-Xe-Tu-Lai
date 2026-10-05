@@ -296,9 +296,13 @@ Bộ test tự động được xây dựng để kiểm tra các chức năng c
 Các test tập trung vào:
 
 MC1: Hash Table và Persistence.
+
 MC2: Merge Sort, Binary Search và Range Query.
+
 RF1: Tìm kiếm theo tiền tố bằng Trie.
+
 RF2: Các thao tác Insert, Top, ExtractMax và RemoveById.
+
 RF3: Undo ADD, UPDATE, DELETE và nguyên tắc LIFO của Stack.
 
 Các test được sử dụng để phát hiện lỗi và xác nhận tính đúng đắn trước khi thực hiện benchmark và đánh giá hiệu năng.
