@@ -539,7 +539,41 @@ Do đó, lựa chọn `MyStack` xuất phát trực tiếp từ** access pattern
 
 Phần Automated Test và Benchmark được thực hiện để kiểm chứng tính đúng đắn và hiệu năng của component, nhưng được trình bày riêng trong phần công việc kiểm thử và đánh giá hiệu năng.
 # D4 - IMPLEMENTATION
-## 1. Lịch sử commit
+
+### 1. Cấu trúc mã nguồn
+
+- **Requirement:** RF3 – Hoàn tác thao tác tạo/sửa/xóa đơn thuê.
+- **Cấu trúc dữ liệu:** `MyStack`.
+- **Thành phần xử lý:** `UndoManager`.
+- **Branch:** `feature/rf3-undo-stack`.
+
+### 2. Chức năng đã cài đặt
+
+| STT | Chức năng | Mô tả |
+| --- | --------- | ----- |
+| 1 | `Push()` | Đưa thao tác vào Stack để lưu lịch sử |
+| 2 | `Pop()` | Lấy thao tác gần nhất ra khỏi Stack |
+| 3 | Undo `ADD` | Hoàn tác việc thêm đơn thuê |
+| 4 | Undo `UPDATE` | Khôi phục dữ liệu cũ thông qua `oldData` |
+| 5 | Undo `DELETE` | Khôi phục đơn thuê đã bị xóa |
+| 6 | Undo nhiều bước | Hoàn tác các thao tác theo nguyên tắc LIFO |
+| 7 | Kiểm tra ngày | Kiểm tra ngày bắt đầu và ngày kết thúc hợp lệ |
+
+### 3. Kiểm thử
+
+Phần RF3 có automated test cho:
+
+| STT | Test | Nội dung kiểm tra |
+| --- | ---- | ----------------- |
+| 1 | Stack LIFO | Phần tử đưa vào sau được lấy ra trước |
+| 2 | Pop Stack rỗng | Stack rỗng không gây lỗi |
+| 3 | Undo ADD | Bản ghi vừa thêm được xóa khi Undo |
+| 4 | Undo UPDATE | Dữ liệu được khôi phục về `oldData` |
+| 5 | Undo DELETE | Bản ghi bị xóa được khôi phục |
+| 6 | Undo theo LIFO | Nhiều thao tác được hoàn tác từ mới nhất đến cũ nhất |
+| 7 | Kiểm tra ngày | Ngày bắt đầu và ngày kết thúc hợp lệ |
+
+## 4. Lịch sử commit
 Link commit:
 1. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/c084f17c942221e8d74d1974ff3b1ff589750b01
 2. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/7ee191a21fa38963199648006c360243622afece
