@@ -47,12 +47,14 @@ int g_passed = 0;
 int g_failed = 0;
 ```
 Sau khi chạy toàn bộ test, chương trình in:
-
+```cpp
 X passed, Y failed
+```
 
 và trả về mã:
-
+```cpp
 return g_failed == 0 ? 0 : 1;
+```
 
 Do đó có thể xác định trực tiếp toàn bộ bộ test MC1 có vượt qua hay không.
 
