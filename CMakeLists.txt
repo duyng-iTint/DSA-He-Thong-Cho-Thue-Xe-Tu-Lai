@@ -20,7 +20,7 @@ target_link_libraries(CarRentalApp PRIVATE core)
 add_executable(RentalWebCore web/core_bridge.cpp)
 target_link_libraries(RentalWebCore PRIVATE core)
 
-add_executable(RentalMC2Demo src/presentation/mainMC1.cpp)
+add_executable(RentalMC2Demo src/presentation/mainMC2.cpp)
 target_link_libraries(RentalMC2Demo PRIVATE core)
 
 add_executable(RentalMC1Demo src/presentation/demo_mc1.cpp)
@@ -30,8 +30,11 @@ add_executable(BenchmarkMC1 benchmark/benchmark_mc1.cpp)
 target_include_directories(BenchmarkMC1 PRIVATE src/core/model src/core/structures src/core/services)
 target_link_libraries(BenchmarkMC1 PRIVATE core)
 
+add_executable(BenchmarkMC2 benchmark/benchmark_mc2.cpp)
+target_link_libraries(BenchmarkMC2 PRIVATE core)
+
 enable_testing()
-add_executable(TestMC2Correctness test/test_correctness.cpp)
+add_executable(TestMC2Correctness test/test_thanhvien2.cpp)
 target_link_libraries(TestMC2Correctness PRIVATE core)
 add_test(NAME TestMC2Correctness COMMAND TestMC2Correctness)
 

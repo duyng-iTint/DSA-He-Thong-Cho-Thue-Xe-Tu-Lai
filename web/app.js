@@ -98,8 +98,8 @@ async function refreshPriority() {
   $('#priority-result').innerHTML = result.items.length ? result.items.map((item, i) => `<div class="priority-item"><span class="car-rank">${i + 1}</span><b>${escapeHtml(item.booking_id)}</b><span>Hạng ${item.membership_tier}</span><small>${new Date(item.booking_timestamp).toLocaleTimeString('vi-VN')}</small></div>`).join('') : 'Hàng đợi ưu tiên đang trống.';
 }
 $('#priority-form').addEventListener('submit', async event => {
-  event.preventDefault(); const payload = Object.fromEntries(new FormData(event.currentTarget));
-  try { await api('/api/priority', { method: 'POST', body: JSON.stringify(payload) }); event.currentTarget.reset(); await refreshPriority(); notify('Đã xếp yêu cầu bằng Max-Heap.'); }
+  event.preventDefault(); const form = event.currentTarget; const payload = Object.fromEntries(new FormData(form));
+  try { await api('/api/priority', { method: 'POST', body: JSON.stringify(payload) }); form.reset(); await refreshPriority(); notify('Đã xếp yêu cầu bằng Max-Heap.'); }
   catch (error) { notify(error.message, true); }
 });
 $('#process-priority').addEventListener('click', async () => {

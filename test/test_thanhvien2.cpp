@@ -96,6 +96,21 @@ int main() {
     }
     check(rangeMatches, "Range Query (Binary Search) khop 100% voi loc brute-force");
 
+    // Khoang tinh ca hai moc, ke ca nhieu don cung ngay.
+    std::vector<RentalRecord> boundaryRecords = {
+        makeRecord("START_2", "P8", "Toyota", "Vios", "2024-02-01"),
+        makeRecord("END", "P9", "Honda", "City", "2024-05-31"),
+        makeRecord("START_1", "P7", "Kia", "Morning", "2024-02-01"),
+        makeRecord("BEFORE", "P6", "Mazda", "3", "2024-01-31"),
+        makeRecord("AFTER", "P10", "Ford", "Ranger", "2024-06-01"),
+    };
+    RentalService::sortByRentDate(boundaryRecords);
+    const auto boundaryRange = RentalService::queryByDateRange(boundaryRecords, "2024-02-01", "2024-05-31");
+    check(boundaryRange.size() == 3,
+          "Range Query lay du ca don dung ngay bat dau va ket thuc");
+    check(RentalService::queryByDateRange(boundaryRecords, "2024-06-01", "2024-02-01").empty(),
+          "Range Query rong khi ngay bat dau sau ngay ket thuc");
+
     // ---------- Test 4: Bien tren/duoi cua khoang (edge case) ----------
     auto emptyResult = RentalService::queryByDateRange(records, "2030-01-01", "2030-12-31");
     check(emptyResult.empty(), "Range Query tra ve rong khi khong co du lieu trong khoang");
@@ -113,6 +128,17 @@ int main() {
     check(topDescending, "Top xe hot sap xep giam dan dung theo so luot thue");
     // P1 va P2 moi xe xuat hien 2 lan trong du lieu test -> phai dung dau bang (>=2)
     check(!top.empty() && top[0].rentCount >= 2, "Xe co nhieu luot thue nhat duoc xep hang 1");
+    check(stats.size() == 5 && top.size() == 3 && top[0].rentCount == 2 && top[1].rentCount == 2,
+          "Thong ke gom dung theo bien so va tra dung Top-K");
+    check(RentalService::topRentedCars(stats, 0).empty(),
+          "Top-K bang 0 tra ve danh sach rong");
+    check(RentalService::topRentedCars(stats, -1).empty(),
+          "Top-K am duoc xu ly nhu 0");
+    check(RentalService::topRentedCars(stats, 99).size() == stats.size(),
+          "Top-K lon hon so xe tra ve toan bo xe");
+    check(RentalService::buildCarStats({}).empty() &&
+          RentalService::topRentedCars({}, 5).empty(),
+          "Thong ke va Top-K xu ly du lieu rong");
 
     std::cout << "\n===============================================\n";
     std::cout << "KET QUA: " << (totalChecks - failedChecks) << "/" << totalChecks << " test PASS\n";
