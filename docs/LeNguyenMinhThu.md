@@ -551,6 +551,18 @@ UPDATE B001
 Do đó, lựa chọn `MyStack` xuất phát trực tiếp từ** access pattern của RF3**, thay vì chọn cấu trúc dữ liệu chỉ dựa trên thói quen hoặc tính phổ biến.
 
 Phần Automated Test và Benchmark được thực hiện để kiểm chứng tính đúng đắn và hiệu năng của component, nhưng được trình bày riêng trong phần công việc kiểm thử và đánh giá hiệu năng.
+# D4 - Mã nguồn (3 tầng, ≥2 cấu trúc tự cài đặt, có test), lịch sử commit gắn với từng thành viên
+## 1. Lịch sử commit
+Link commit:
+1. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/c084f17c942221e8d74d1974ff3b1ff589750b01
+2. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/7ee191a21fa38963199648006c360243622afece
+3. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/b68c452ccac1da44e176fc48b7204276f7f554e8
+4. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/043499513f30eb0aa237a8ae2c7c068b084d0c1e
+5. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/0396428abec8bb530f85b5f76db99cea62fb4bd5
+6. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/0396428abec8bb530f85b5f76db99cea62fb4bd5
+7. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/33d8f224847c8dd42c96fee5f3d6b3b3fb9d31af
+8. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/6d181ad251fb6e3c2bc4f47cc5c45614d4fd4d2d
+9. https://github.com/duyng-iTint/DSA-He-Thong-Cho-Thue-Xe-Tu-Lai/commit/9a547bf5231fc33c27102569199b23d160a831bf
 # D6 — ĐÁNH GIÁ KỸ THUẬT THÀNH VIÊN TRONG NHÓM
 
 ## 1. Thành phần được đánh giá
