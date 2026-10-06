@@ -1,33 +1,4 @@
-// MyHashTable.h
-// -------------
-// CAU TRUC DU LIEU TU CAI DAT TU DAU #1 (Muc 6.2 - bat buoc >= 2 cau truc)
-//
-// Giai quyet MC1: "Tra cuu don thue / xe theo Ma dinh danh" - tra cuu O(1)
-// trung binh, khong duoc duyet tuyen tinh khi du lieu co hang chuc nghin
-// ban ghi.
-//
-// THIET KE:
-// - Ky thuat xu ly va cham: SEPARATE CHAINING (moi bucket la 1 danh sach
-//   lien ket don cac Node (key, value)).
-// - Ham bam: polynomial rolling hash tren chuoi key (Booking_ID / bien so),
-//   TU VIET BANG TAY, khong dung std::hash co san, de the hien day la tu
-//   cai dat tu dau, khong dua vao ham bam co san cua ngon ngu/thu vien.
-// - Tu dong RESIZE (rehash) khi load factor > 0.75, de tra cuu van giu
-//   O(1) trung binh du du lieu tich luy tang dan qua nhieu nam hoat dong.
-//
-// KHONG dung std::unordered_map cho phan loi tra cuu - std::unordered_map
-// chi duoc dung (neu co) o tang benchmark de SO SANH, khong phai de thay
-// the MyHashTable.
-//
-// Do phuc tap:
-// - insert / search / remove: O(1) trung binh, O(N) worst-case (khi tat
-//   ca key bam trung 1 bucket - cuc hiem voi ham bam tot + resize).
-// - Danh doi (trade-off) da chap nhan: khong ho tro duyet theo thu tu
-//   thoi gian / khoang ngay -> day la ly do MC2 phai dung cau truc khac
-//   (Sorted Array), va la goc cua "yeu cau xung dot" MC2 vs RF2.
-//
-// Template hoa theo kieu Value de tai su dung duoc cho ca 2 bang bam
-// (theo booking_id va theo bien_so) ma khong lap code.
+// MyHashTable.
 
 #pragma once
 
@@ -52,8 +23,6 @@ private:
     double loadFactorThreshold_ = 0.75;
 
     // Ham bam tu cai dat (polynomial rolling hash), tuong tu cach Java
-    // cai dat String.hashCode(), tu trien khai bang tay de khong phu
-    // thuoc vao std::hash cua thu vien chuan.
     std::size_t hashKey(const std::string& key) const {
         std::size_t h = 0;
         for (char ch : key) {
@@ -67,8 +36,6 @@ private:
     }
 
     // Tang gap doi so bucket roi bam lai (rehash) toan bo phan tu.
-    // Thao tac nay ton O(N) nhung chi xay ra khong thuong xuyen
-    // (amortized), nen chi phi trung binh moi insert van la O(1).
     void resize() {
         std::vector<Node*> oldBuckets = buckets_;
         capacity_ = capacity_ * 2 + 1; // giu le, gan so nguyen to
@@ -206,8 +173,6 @@ public:
     };
 
     // Thong tin phuc vu giai thich/benchmark: capacity, size, load factor,
-    // do dai chuoi (chain) dai nhat - minh chung cho viec va cham duoc
-    // kiem soat tot.
     Stats stats() const {
         std::size_t maxChain = 0;
         for (Node* head : buckets_) {

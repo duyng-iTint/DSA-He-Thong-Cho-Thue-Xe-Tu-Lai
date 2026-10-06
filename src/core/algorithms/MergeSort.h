@@ -1,13 +1,6 @@
 //TT
 
 // MergeSort.h
-// Dung template + comparator de tai su dung cho nhieu loai du lieu:
-//   - Sap xep RentalRecord theo rentDate  (phuc vu MC2 - Range Query)
-//   - Sap xep RentalRecord theo carPlate  (buoc trung gian de gom nhom thong ke xe)
-//   - Sap xep CarStat theo rentCount giam dan (phuc vu MC2 - Top xe hot)
-//
-// Do phuc tap: O(N log N) moi truong hop (best/worst/average) - on dinh (stable sort),
-// phu hop de "bulk load" du lieu lich su thue xe mot lan dau vao Sorted Array.
 #pragma once
 #include <vector>
 

@@ -1,14 +1,4 @@
 // Booking.h
-// ---------
-// Định nghĩa struct "bản ghi đơn thuê xe" (Booking record).
-//
-// Đây KHÔNG phải là một cấu trúc dữ liệu DSA (không tính vào yêu cầu
-// "2 cấu trúc tự cài đặt từ đầu" của Muc 6.2) - no chi la mot struct
-// don gian de luu thong tin 1 dong du lieu.
-//
-// Cac truong bam theo mo ta bai toan trong file
-// HE_THONG_CHO_THUE_XE_TU_LAI.docx: ma don (Booking_ID), bien so xe,
-// ten khach, ngay bat dau/ket thuc, hang/dong xe, trang thai.
 
 #pragma once
 

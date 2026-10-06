@@ -1,10 +1,6 @@
 //TT
 
 // BinarySearch.h
-// Tu cai dat Binary Search (khong dung std::lower_bound / std::upper_bound).
-// Ap dung tren mang RentalRecord DA duoc Merge Sort theo rentDate tang dan.
-// Muc tieu MC2: tim nhanh vi tri bat dau / ket thuc cua 1 khoang ngay thue,
-// do phuc tap O(log N), thay vi phai duyet tuyen tinh O(N).
 #pragma once
 #include <vector>
 #include <string>
